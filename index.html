@@ -1,104 +1,1321 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Плагины для Pixso — Admiral</title>
+<meta name="description" content="Восемь плагинов для Pixso: экспорт презентаций в PowerPoint и PDF, графики нативными слоями, сборка компонентов, орфография и типографика, контраст по WCAG, аудит стилей и переменных, поиск слоёв и выгрузка иконок.">
+<meta name="theme-color" content="#050505">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
+<meta property="og:type" content="website">
+<meta property="og:title" content="Плагины для Pixso — Admiral">
+<meta property="og:description" content="Восемь плагинов, которые снимают рутину с макетов в Pixso: презентации, графики, компоненты, тексты, контраст, стили, поиск слоёв и иконки.">
 
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="/">
-
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
-
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="example">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
-
-  <title>example</title>
-  <link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/art.css">
 </head>
 <body>
-  <!-- This script installs service_worker.js to provide PWA functionality to
-       application. For more information, see:
-       https://developers.google.com/web/fundamentals/primers/service-workers -->
-  <script>
-    const serviceWorkerVersion = "369023726";
-    var scriptLoaded = false;
-    function loadMainDartJs() {
-      if (scriptLoaded) {
-        return;
-      }
-      scriptLoaded = true;
-      var scriptTag = document.createElement('script');
-      scriptTag.src = 'main.dart.js';
-      scriptTag.type = 'application/javascript';
-      document.body.append(scriptTag);
-    }
 
-    if ('serviceWorker' in navigator) {
-      // Service workers are supported. Use them.
-      window.addEventListener('load', function () {
-        // Wait for registration to finish before dropping the <script> tag.
-        // Otherwise, the browser will load the script multiple times,
-        // potentially different versions.
-        var serviceWorkerUrl = 'flutter_service_worker.js?v=' + serviceWorkerVersion;
-        navigator.serviceWorker.register(serviceWorkerUrl)
-          .then((reg) => {
-            function waitForActivation(serviceWorker) {
-              serviceWorker.addEventListener('statechange', () => {
-                if (serviceWorker.state == 'activated') {
-                  console.log('Installed new service worker.');
-                  loadMainDartJs();
-                }
-              });
-            }
-            if (!reg.active && (reg.installing || reg.waiting)) {
-              // No active web worker and we have installed or are installing
-              // one for the first time. Simply wait for it to activate.
-              waitForActivation(reg.installing || reg.waiting);
-            } else if (!reg.active.scriptURL.endsWith(serviceWorkerVersion)) {
-              // When the app updates the serviceWorkerVersion changes, so we
-              // need to ask the service worker to update.
-              console.log('New service worker available.');
-              reg.update();
-              waitForActivation(reg.installing);
-            } else {
-              // Existing service worker is still good.
-              console.log('Loading app from service worker.');
-              loadMainDartJs();
-            }
-          });
+<!-- ══════════════════ ИКОНКИ ══════════════════ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <symbol id="i-slides" viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M12 17v3.5M8.5 20.5h7"/></symbol>
+  <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5z"/><path d="M14 2.5v5h5M8.5 14.5h7M8.5 17.5h4"/></symbol>
+  <symbol id="i-text" viewBox="0 0 24 24"><path d="M4.5 7V4.5h15V7M12 4.5v15M9 19.5h6"/></symbol>
+  <symbol id="i-shapes" viewBox="0 0 24 24"><rect x="3" y="3" width="8.5" height="8.5" rx="1.6"/><circle cx="16.2" cy="16.2" r="4.6"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.2l2.7 5.6 6.1.85-4.45 4.3 1.07 6.05L12 17.15 6.58 20l1.07-6.05L3.2 9.65l6.1-.85z"/></symbol>
+  <symbol id="i-swap" viewBox="0 0 24 24"><path d="M4 8h13M14 5l3 3-3 3M20 16H7M10 13l-3 3 3 3"/></symbol>
+  <symbol id="i-resize" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></symbol>
+  <symbol id="i-bar" viewBox="0 0 24 24"><path d="M3 20.5h18M6.5 20.5v-6M12 20.5V6M17.5 20.5v-9"/></symbol>
+  <symbol id="i-line" viewBox="0 0 24 24"><path d="M3 20.5h18M5 16l4-4.5 3.5 3L19.5 6"/><circle cx="9" cy="11.5" r="1.3"/><circle cx="12.5" cy="14.5" r="1.3"/></symbol>
+  <symbol id="i-table" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9.5h18M9.5 9.5V20"/></symbol>
+  <symbol id="i-dice" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="3.5"/><circle cx="8.4" cy="8.4" r="1.25" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.25" fill="currentColor" stroke="none"/><circle cx="15.6" cy="15.6" r="1.25" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-sort" viewBox="0 0 24 24"><path d="M4 6.5h9M4 12h6.5M4 17.5h4M17.5 5v14M17.5 19l3-3M17.5 19l-3-3"/></symbol>
+  <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1 0 1.7-.7 1.7-1.6 0-.4-.2-.8-.5-1.1a1.6 1.6 0 0 1 1.1-2.7H16a5 5 0 0 0 5-5C21 6.3 17 3 12 3z"/><circle cx="7.6" cy="11.4" r="1.2" fill="currentColor" stroke="none"/><circle cx="10.6" cy="7.4" r="1.2" fill="currentColor" stroke="none"/><circle cx="15.4" cy="8.4" r="1.2" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3.5 12.5L12 17l8.5-4.5M3.5 16.5L12 21l8.5-4.5"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M8.5 6H21M8.5 12H21M8.5 18H21M3.6 6h.01M3.6 12h.01M3.6 18h.01"/></symbol>
+  <symbol id="i-component" viewBox="0 0 24 24"><path d="M12 2.6l3.6 3.6L12 9.8 8.4 6.2zM12 14.2l3.6 3.6L12 21.4l-3.6-3.6zM6.2 8.4L9.8 12l-3.6 3.6L2.6 12zM17.8 8.4L21.4 12l-3.6 3.6L14.2 12z"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10.2 13.6a4 4 0 0 0 5.8.2l2.6-2.6a4 4 0 1 0-5.7-5.7l-1.4 1.4"/><path d="M13.8 10.4a4 4 0 0 0-5.8-.2l-2.6 2.6a4 4 0 1 0 5.7 5.7l1.4-1.4"/></symbol>
+  <symbol id="i-wand" viewBox="0 0 24 24"><path d="M5 19.5L17 7.5M14.4 4.6l5 5M8.5 3v3.4M6.8 4.7h3.4M18 14.6V18M16.3 16.3h3.4"/></symbol>
+  <symbol id="i-similar" viewBox="0 0 24 24"><rect x="2.6" y="4.6" width="10.4" height="10.4" rx="2.2"/><rect x="11" y="9" width="10.4" height="10.4" rx="2.2"/></symbol>
+  <symbol id="i-library" viewBox="0 0 24 24"><rect x="3" y="4" width="4.2" height="16" rx="1.2"/><rect x="9.3" y="4" width="4.2" height="16" rx="1.2"/><rect x="15.6" y="4" width="5.4" height="16" rx="1.2"/><path d="M18.3 8.5v7"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 8V5.5A2.5 2.5 0 0 1 5.5 3H8M16 3h2.5A2.5 2.5 0 0 1 21 5.5V8M21 16v2.5a2.5 2.5 0 0 1-2.5 2.5H16M8 21H5.5A2.5 2.5 0 0 1 3 18.5V16M3.5 12h17"/></symbol>
+  <symbol id="i-spell" viewBox="0 0 24 24"><path d="M2.5 17.5L7 6l4.5 11.5M4.4 13.6h5.2M13.5 12.6l2.8 2.8 5.2-5.6"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24"><path d="M9.4 6.6C6.8 8 5.5 10.2 5.5 13v4.4h5.2v-6.2H8.2c.2-1.4.6-2.4 1.9-3.3zM20.4 6.6C17.8 8 16.5 10.2 16.5 13v4.4h5.2v-6.2h-2.5c.2-1.4.6-2.4 1.9-3.3z"/></symbol>
+  <symbol id="i-rules" viewBox="0 0 24 24"><path d="M3 6.6l1.9 1.9L8.2 5.2M3 13l1.9 1.9L8.2 11.6M3 19.4l1.9 1.9L8.2 18"/><path d="M12 6.8h9M12 13.2h9M12 19.6h9"/></symbol>
+  <symbol id="i-ai" viewBox="0 0 24 24"><path d="M10.5 2.8l1.6 4.3 4.3 1.6-4.3 1.6-1.6 4.3-1.6-4.3L4.6 8.7l4.3-1.6z"/><path d="M18 14.6l.85 2.15 2.15.85-2.15.85L18 20.6l-.85-2.15-2.15-.85 2.15-.85z"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-droplet" viewBox="0 0 24 24"><path d="M12 3.2s6.2 6.4 6.2 10.2a6.2 6.2 0 0 1-12.4 0C5.8 9.6 12 3.2 12 3.2z"/></symbol>
+  <symbol id="i-badge" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.3l2.6 2.6L16.2 9.4"/></symbol>
+  <symbol id="i-merge" viewBox="0 0 24 24"><path d="M5 4v3.5c0 3.2 2.6 4.5 7 4.5M19 4v3.5c0 3.2-2.6 4.5-7 4.5M12 12v8M9 17l3 3 3-3"/></symbol>
+  <symbol id="i-variable" viewBox="0 0 24 24"><path d="M6.6 3.6C4.9 6 4 8.8 4 12s.9 6 2.6 8.4M17.4 3.6C19.1 6 20 8.8 20 12s-.9 6-2.6 8.4"/><path d="M9.6 9.6l4.8 4.8M14.4 9.6l-4.8 4.8"/></symbol>
+  <symbol id="i-filter" viewBox="0 0 24 24"><path d="M3.4 5.2h17.2l-6.6 8v6.2l-4 2v-8.2z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.6"/><path d="M15.4 15.4L21 21"/></symbol>
+  <symbol id="i-replace" viewBox="0 0 24 24"><path d="M4 6.6h10M11 3.6l3 3-3 3M20 17.4H10M13 20.4l-3-3 3-3"/></symbol>
+  <symbol id="i-rename" viewBox="0 0 24 24"><path d="M20.4 12.6l-7.8 7.8a2 2 0 0 1-2.8 0l-6.2-6.2a2 2 0 0 1-.55-1.75l.9-5.4A2 2 0 0 1 5.6 5.4l5.4-.9a2 2 0 0 1 1.75.55l7.65 7.65a2 2 0 0 1 0 1.9z"/><circle cx="8.4" cy="8.4" r="1.3"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".9" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3.5v11M8 10.5l4 4 4-4M4 17v2.5A1.5 1.5 0 0 0 5.5 21h13a1.5 1.5 0 0 0 1.5-1.5V17"/></symbol>
+  <symbol id="i-zip" viewBox="0 0 24 24"><path d="M3.5 7.6a2 2 0 0 1 2-2h3.4l1.8 2.2h7.8a2 2 0 0 1 2 2v8.6a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/><path d="M12.6 11v1.4M12.6 14v1.4M12.6 17v1.4"/></symbol>
+  <symbol id="i-compare" viewBox="0 0 24 24"><path d="M8 4L4 8l4 4"/><path d="M4 8h11a5 5 0 0 1 5 5"/><path d="M16 20l4-4-4-4"/><path d="M20 16H9a5 5 0 0 1-5-5"/></symbol>
+  <symbol id="i-snapshot" viewBox="0 0 24 24"><path d="M3.5 8.6a2 2 0 0 1 2-2h2l1.3-2h6.4l1.3 2h2a2 2 0 0 1 2 2v8.8a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3.4"/></symbol>
+  <symbol id="i-history" viewBox="0 0 24 24"><path d="M3.6 12a8.4 8.4 0 1 0 2.6-6.1"/><path d="M3.6 4.2v4.2h4.2M12 7.6V12l3 2"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.4c0 4.4-3.1 8.2-7.5 9.6-4.4-1.4-7.5-5.2-7.5-9.6V6z"/><path d="M9.2 12l2.1 2.1 4.3-4.4"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13.6 2.6L4.6 13.6h6l-.6 7.8 9.4-11h-6.4z"/></symbol>
+  <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9.6 3v6.2L4.7 18a2 2 0 0 0 1.7 3h11.2a2 2 0 0 0 1.7-3l-4.9-8.8V3"/><path d="M8.2 3h7.6M7.6 14.6h8.8"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3.4" y="3.4" width="7.2" height="7.2" rx="1.6"/><rect x="13.4" y="3.4" width="7.2" height="7.2" rx="1.6"/><rect x="3.4" y="13.4" width="7.2" height="7.2" rx="1.6"/><rect x="13.4" y="13.4" width="7.2" height="7.2" rx="1.6"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="M4.5 12h15M13.5 6l6 6-6 6"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 20V5M6 11l6-6 6 6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.5l5 5 10-11"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></symbol>
+  <symbol id="i-undo" viewBox="0 0 24 24"><path d="M4 9.5h11a5 5 0 0 1 0 10H9M8 5.5l-4 4 4 4"/></symbol>
+  <symbol id="i-cursor" viewBox="0 0 24 24"><path d="M6 3.4l12.4 8-5.4 1.2 3 6.1-2.6 1.3-3-6.1L6 18.2z"/></symbol>
+  <symbol id="i-window" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18M6.4 6.6h.01M9 6.6h.01"/></symbol>
+  <symbol id="i-percent" viewBox="0 0 24 24"><path d="M19 5L5 19"/><circle cx="7.6" cy="7.6" r="2.7"/><circle cx="16.4" cy="16.4" r="2.7"/></symbol>
+  <symbol id="i-frame" viewBox="0 0 24 24"><path d="M7 2.6v18.8M17 2.6v18.8M2.6 7h18.8M2.6 17h18.8"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20.4 11A8.5 8.5 0 0 0 6 6.2L3.4 8.6M3.4 4v4.6H8"/><path d="M3.6 13a8.5 8.5 0 0 0 14.4 4.8l2.6-2.4M20.6 20v-4.6H16"/></symbol>
+  <symbol id="i-ruler" viewBox="0 0 24 24"><path d="M3.4 15.6L15.6 3.4l5 5-12.2 12.2z"/><path d="M7 12l2 2M10 9l2 2M13 6l2 2"/></symbol>
+  <symbol id="i-lang" viewBox="0 0 24 24"><path d="M3 5.5h9M7.5 3.5v2M9.5 5.5c0 4-3 7.5-6.5 8.5M5.5 9.5c1 2.4 3.5 4.2 6 4.8"/><path d="M12.5 20.5l4-9.5 4 9.5M13.8 17.6h5.4"/></symbol>
+  <symbol id="i-stack" viewBox="0 0 24 24"><rect x="3" y="3.5" width="18" height="6" rx="2"/><rect x="3" y="14.5" width="18" height="6" rx="2"/></symbol>
+</defs></svg>
 
-        // If service worker doesn't succeed in a reasonable amount of time,
-        // fallback to plaint <script> tag.
-        setTimeout(() => {
-          if (!scriptLoaded) {
-            console.warn(
-              'Failed to load app from service worker. Falling back to plain <script> tag.',
-            );
-            loadMainDartJs();
-          }
-        }, 4000);
-      });
-    } else {
-      // Service workers not supported. Just drop the <script> tag.
-      loadMainDartJs();
-    }
-  </script>
+<!-- ══════════════════ ШАПКА ══════════════════ -->
+<header class="topbar">
+  <div class="wrap topbar__in">
+    <a class="brand" href="#top">
+      <svg class="brand__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect x="1" y="1" width="30" height="30" rx="9" stroke="url(#bg1)" stroke-width="1.6"/>
+        <path d="M16 7.5l4.6 4.6-4.6 4.6-4.6-4.6z" fill="#ff5386"/>
+        <path d="M16 15.3l4.6 4.6L16 24.5l-4.6-4.6z" fill="#7a5cff" opacity=".9"/>
+        <defs><linearGradient id="bg1" x1="0" y1="0" x2="32" y2="32">
+          <stop stop-color="#ff5386"/><stop offset=".55" stop-color="#7a5cff"/><stop offset="1" stop-color="#35d6e7"/>
+        </linearGradient></defs>
+      </svg>
+      <span class="brand__name">Admiral</span>
+      <span class="brand__sub">плагины для Pixso</span>
+    </a>
+    <nav class="navlinks">
+      <a href="#presman">PresMan</a>
+      <a href="#charts">Charts</a>
+      <a href="#compman">CompMan</a>
+      <a href="#gramm">GrammMan</a>
+      <a href="#contrast">Contrast</a>
+      <a href="#styles">Styles</a>
+      <a href="#chooseman">ChooseMan</a>
+      <a href="#icons">Icons</a>
+      <a href="#how">Как устроено</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ══════════════════ ГЕРОЙ ══════════════════ -->
+<section class="hero">
+  <div class="hero__glow"></div>
+  <div class="hero__grid"></div>
+  <div class="wrap hero__in">
+    <div>
+      <div class="eyebrow reveal">Восемь плагинов для Pixso</div>
+      <h1 class="reveal d1">Рутина в макетах?<br><span class="accent">Отдайте её плагинам.</span></h1>
+      <p class="hero__lead reveal d2">
+        Собрать презентацию из фреймов, построить график, вытащить компонент из готовой вёрстки,
+        вычистить типографику, проверить контраст, свести стили, найти все слои разом,
+        выгрузить иконки. Восемь инструментов, которые делают это за вас — и оставляют результат
+        живыми слоями, а не картинкой.
+      </p>
+      <div class="hero__stats reveal d3">
+        <span class="stat"><svg class="ico"><use href="#i-layers"/></svg><b>Нативные ноды</b> — не растр</span>
+        <span class="stat"><svg class="ico"><use href="#i-flask"/></svg><b>Автотесты</b> с эталонами</span>
+        <span class="stat"><svg class="ico"><use href="#i-lang"/></svg>Интерфейс <b>на русском</b></span>
+      </div>
+    </div>
+
+    <div class="art anim" style="--c:var(--violet)">
+      <svg viewBox="0 0 560 420" role="img" aria-label="Панель плагинов рядом с холстом Pixso">
+        <defs>
+          <linearGradient id="hgrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#ff5386"/><stop offset=".5" stop-color="#7a5cff"/><stop offset="1" stop-color="#35d6e7"/>
+          </linearGradient>
+          <clipPath id="hclip"><rect x="20" y="48" width="316" height="324" rx="16"/></clipPath>
+        </defs>
+
+        <!-- холст -->
+        <rect x="20" y="48" width="316" height="324" rx="16" fill="#0a0a0e" stroke="rgba(255,255,255,.10)"/>
+        <g clip-path="url(#hclip)">
+          <g stroke="rgba(255,255,255,.05)">
+            <path d="M20 112h316M20 176h316M20 240h316M20 304h316M84 48v324M148 48v324M212 48v324M276 48v324"/>
+          </g>
+          <g class="a-in" style="animation-delay:.2s">
+            <rect x="44" y="76" width="124" height="82" rx="8" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.16)"/>
+            <rect x="56" y="90" width="62" height="7" rx="3.5" fill="rgba(255,255,255,.34)"/>
+            <rect x="56" y="104" width="96" height="5" rx="2.5" fill="rgba(255,255,255,.16)"/>
+            <rect x="56" y="116" width="80" height="5" rx="2.5" fill="rgba(255,255,255,.16)"/>
+            <rect x="56" y="132" width="44" height="16" rx="8" fill="#ff5386" opacity=".85"/>
+          </g>
+          <g class="a-in" style="animation-delay:.36s">
+            <rect x="188" y="76" width="122" height="60" rx="8" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.16)"/>
+            <path d="M200 122l18-20 16 13 22-28 20 22" stroke="#7a5cff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+          <g class="a-in" style="animation-delay:.5s">
+            <rect x="44" y="180" width="90" height="66" rx="8" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.16)"/>
+            <circle cx="89" cy="213" r="20" stroke="#35d6e7" stroke-width="2.4" fill="none" stroke-dasharray="88 40" transform="rotate(-90 89 213)"/>
+          </g>
+          <g class="a-in" style="animation-delay:.64s">
+            <rect x="154" y="180" width="156" height="130" rx="8" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.16)"/>
+            <g fill="rgba(255,255,255,.18)">
+              <rect x="168" y="196" width="128" height="6" rx="3"/>
+              <rect x="168" y="210" width="104" height="6" rx="3"/>
+              <rect x="168" y="224" width="118" height="6" rx="3"/>
+            </g>
+            <g transform="translate(168,246)">
+              <rect width="56" height="48" rx="6" fill="rgba(184,242,77,.16)" stroke="rgba(184,242,77,.5)"/>
+              <rect x="66" width="56" height="48" rx="6" fill="rgba(255,176,32,.16)" stroke="rgba(255,176,32,.5)"/>
+            </g>
+          </g>
+        </g>
+
+        <!-- связи -->
+        <g fill="none" stroke="url(#hgrad)" stroke-width="1.6" opacity=".85">
+          <path class="a-flow" d="M336 132C356 132 348 100 366 100"/>
+          <path class="a-flow" style="animation-delay:-1.6s" d="M336 214C356 214 348 202 366 202"/>
+          <path class="a-flow" style="animation-delay:-3.2s" d="M336 288C356 288 348 304 366 304"/>
+        </g>
+
+        <!-- панель плагинов -->
+        <g class="a-right" style="animation-delay:.15s">
+          <rect x="366" y="30" width="176" height="360" rx="18" fill="#0f0f15" stroke="rgba(255,255,255,.15)"/>
+          <text class="s-text" x="384" y="58" font-size="12.5" font-weight="600" fill="rgba(255,255,255,.9)">Плагины</text>
+          <g fill="rgba(255,255,255,.28)"><circle cx="512" cy="54" r="2"/><circle cx="520" cy="54" r="2"/><circle cx="528" cy="54" r="2"/></g>
+          <path d="M380 70h148" stroke="rgba(255,255,255,.09)"/>
+
+          <g class="a-in" style="animation-delay:.5s"><circle cx="390" cy="94" r="5" fill="#ff5386"/><text class="s-text" x="404" y="98" font-size="11.5">PresMan</text></g>
+          <g class="a-in" style="animation-delay:.6s"><circle cx="390" cy="128" r="5" fill="#7a5cff"/><text class="s-text" x="404" y="132" font-size="11.5">Charts</text></g>
+          <g class="a-in" style="animation-delay:.7s"><circle cx="390" cy="162" r="5" fill="#35d6e7"/><text class="s-text" x="404" y="166" font-size="11.5">CompMan</text></g>
+          <g class="a-in" style="animation-delay:.8s"><circle cx="390" cy="196" r="5" fill="#b8f24d"/><text class="s-text" x="404" y="200" font-size="11.5">GrammMan</text></g>
+          <g class="a-in" style="animation-delay:.9s"><circle cx="390" cy="230" r="5" fill="#ffb020"/><text class="s-text" x="404" y="234" font-size="11.5">Contrast</text></g>
+          <g class="a-in" style="animation-delay:1s"><circle cx="390" cy="264" r="5" fill="#c77dff"/><text class="s-text" x="404" y="268" font-size="11.5">Styles &amp; Variables</text></g>
+          <g class="a-in" style="animation-delay:1.1s"><circle cx="390" cy="298" r="5" fill="#4d8dff"/><text class="s-text" x="404" y="302" font-size="11.5">ChooseMan</text></g>
+          <g class="a-in" style="animation-delay:1.2s"><circle cx="390" cy="332" r="5" fill="#35e0a1"/><text class="s-text" x="404" y="336" font-size="11.5">Icons Download</text></g>
+
+          <rect class="a-in" style="animation-delay:1.35s" x="382" y="352" width="144" height="26" rx="13" fill="url(#hgrad)" opacity=".9"/>
+          <text class="a-in" style="animation-delay:1.4s" x="454" y="369" font-size="11.5" font-weight="600" text-anchor="middle" fill="#fff" font-family="Inter, sans-serif">Запустить</text>
+        </g>
+
+        <!-- искры -->
+        <g fill="#fff">
+          <circle class="a-glow" cx="348" cy="70" r="2"/>
+          <circle class="a-glow" style="animation-delay:-1.1s" cx="356" cy="352" r="1.6"/>
+          <circle class="a-glow" style="animation-delay:-2.2s" cx="552" cy="150" r="1.6"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ ОБЗОР ══════════════════ -->
+<section class="section" style="padding-top:24px">
+  <div class="wrap">
+    <div class="sechead reveal">
+      <div class="eyebrow">Набор целиком</div>
+      <h2>Восемь инструментов, восемь видов рутины</h2>
+      <p>Каждый плагин закрывает одну конкретную боль в работе с макетом. Ниже — коротко, дальше по странице — подробно, с тем что именно умеет каждый.</p>
+    </div>
+    <div class="cards">
+      <a class="card reveal" href="#presman" style="--c:var(--pink)">
+        <div class="card__ico"><svg class="ico"><use href="#i-slides"/></svg></div>
+        <h3>PresMan</h3>
+        <p>Фреймы → презентация PowerPoint или PDF. Текст и фигуры остаются редактируемыми.</p>
+        <span class="card__go">Подробнее <svg class="ico" style="width:14px;height:14px"><use href="#i-right"/></svg></span>
+      </a>
+      <a class="card reveal d1" href="#charts" style="--c:var(--violet)">
+        <div class="card__ico"><svg class="ico"><use href="#i-bar"/></svg></div>
+        <h3>Charts</h3>
+        <p>Столбчатые и линейные графики нативными слоями, с превью один в один.</p>
+        <span class="card__go">Подробнее <svg class="ico" style="width:14px;height:14px"><use href="#i-right"/></svg></span>
+      </a>
+      <a class="card reveal d2" href="#compman" style="--c:var(--cyan)">
+        <div class="card__ico"><svg class="ico"><use href="#i-component"/></svg></div>
+        <h3>CompMan</h3>
+        <p>Компонент из готовой вёрстки и массовая перепривязка похожих объектов.</p>
+        <span class="card__go">Подробнее <svg class="ico" style="width:14px;height:14px"><use href="#i-right"/></svg></span>
+      </a>
+      <a class="card reveal d3" href="#gramm" style="--c:var(--lime)">
+        <div class="card__ico"><svg class="ico"><use href="#i-spell"/></svg></div>
+        <h3>GrammMan</h3>
+        <p>Орфография и 17 правил типографа прямо в макете, с правкой в один клик.</p>
+        <span class="card__go">Подробнее <svg class="ico" style="width:14px;height:14px"><use href="#i-right"/></svg></span>
+      </a>
+      <a class="card reveal" href="#contrast" style="--c:var(--amber)">
+        <div class="card__ico"><svg class="ico"><use href="#i-contrast"/></svg></div>
+        <h3>Contrast</h3>
+        <p>Контраст по WCAG, посчитанный по реально видимому фону, а не по номинальному HEX.</p>
+        <span class="card__go">Подробнее <svg class="ico" style="width:14px;height:14px"><use href="#i-right"/></svg></span>
+      </a>
+      <a class="card reveal d1" href="#styles" style="--c:var(--orchid)">
+        <div class="card__ico"><svg class="ico"><use href="#i-variable"/></svg></div>
+        <h3>Styles &amp; Variables</h3>
+        <p>Аудит дизайн-системы: что привязано к стилям и переменным, а что висит просто так.</p>
+        <span class="card__go">Подробнее <svg class="ico" style="width:14px;height:14px"><use href="#i-right"/></svg></span>
+      </a>
+      <a class="card reveal d2" href="#chooseman" style="--c:var(--blue)">
+        <div class="card__ico"><svg class="ico"><use href="#i-search"/></svg></div>
+        <h3>ChooseMan</h3>
+        <p>Найти все слои по типу и подстроке — и заменить текст во всех разом.</p>
+        <span class="card__go">Подробнее <svg class="ico" style="width:14px;height:14px"><use href="#i-right"/></svg></span>
+      </a>
+      <a class="card reveal d3" href="#icons" style="--c:var(--mint)">
+        <div class="card__ico"><svg class="ico"><use href="#i-download"/></svg></div>
+        <h3>Icons Download</h3>
+        <p>Выгрузка иконок в SVG архивом и дифф набора со снимком: что добавилось и что изменилось.</p>
+        <span class="card__go">Подробнее <svg class="ico" style="width:14px;height:14px"><use href="#i-right"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ 1. PRESMAN ══════════════════ -->
+<section class="plugin" id="presman" style="--c:var(--pink)">
+  <div class="wrap plugin__in">
+    <div>
+      <span class="plugin__tag reveal"><svg class="ico"><use href="#i-slides"/></svg>PresMan</span>
+      <h2 class="reveal d1">Презентация из макета — <em>в два клика</em></h2>
+      <p class="plugin__lead reveal d2">
+        Собирает из фреймов страницы раскадровку и выгружает её в PowerPoint или PDF.
+        Главное: в .pptx попадает не картинка макета, а настоящие объекты PowerPoint — текст можно
+        выделить и переписать, фигуру подвинуть, цвет поменять.
+      </p>
+      <ul class="feats">
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-frame"/></svg></span><span><b>Добавить слайды</b> — все фреймы страницы или только выделенные, автоматически в порядке раскладки на холсте: сверху вниз, слева направо.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-stack"/></svg></span><span><b>Раскадровка с превью</b>: перетаскиванием меняете порядок, крестиком удаляете, «Очистить все» сбрасывает, счётчик показывает 3/12.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-pdf"/></svg></span><span><b>Два формата</b> — .pptx и .pdf в одной кнопке. Выбранный формат запоминается до следующего запуска.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-download"/></svg></span><span><b>Режим «поштучно»</b> — отдельный файл на каждый слайд, имя берётся из имени фрейма.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-text"/></svg></span><span><b>Текст переносится посимвольно</b>: шрифт, начертание, цвет, подчёркивание и зачёркивание, трекинг, интерлиньяж, регистр, прозрачность, гиперссылки — всё внутри одного абзаца, если оно там разное.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-shapes"/></svg></span><span><b>Фигуры нативные</b>: прямоугольники с индивидуальными радиусами углов, эллипсы и дуги, линии, полигоны, звёзды, стрелки, градиенты, тени.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-star"/></svg></span><span><b>Иконки становятся кривыми PowerPoint</b>, а правильная N-лучевая звезда и вектор-стрелка распознаются и ставятся родными фигурами со стрелочным наконечником.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-resize"/></svg></span><span><b>Панель помнит свой размер</b> — растянули один раз, дальше открывается такой же.</span></li>
+      </ul>
+      <div class="note reveal">
+        <div class="note__t"><svg class="ico"><use href="#i-wand"/></svg>Умная деградация вместо растра</div>
+        Плагин заранее считает, чего PowerPoint выразить не умеет — фоновое размытие, маски, обрезку содержимого,
+        повёрнутые фреймы, режимы наложения — и запекает в картинку только это. Если у фрейма обрезка и текст,
+        сначала запекается изображение <i>без текста</i>, а текст кладётся поверх настоящим текстом. Так он остаётся редактируемым.
+      </div>
+      <div class="note reveal">
+        <div class="note__t"><svg class="ico"><use href="#i-flask"/></svg>Экспорт сверяется с эталонами</div>
+        Автоматизация открывает настоящий Pixso в браузере, сама жмёт «Добавить слайды» и «Экспорт»,
+        ловит скачанный файл и сравнивает с эталоном в трёх режимах: XML слайдов внутри .pptx, постранично PDF
+        и PNG-превью. Сотни эталонных файлов — чтобы правка в одном месте не сломала экспорт в другом.
+      </div>
+    </div>
+
+    <div class="art anim plugin__art">
+      <svg viewBox="0 0 520 372" role="img" aria-label="Фреймы превращаются в слайды PowerPoint">
+        <!-- фреймы -->
+        <g class="a-in" style="animation-delay:.1s">
+          <rect x="18" y="42" width="124" height="76" rx="8" fill="rgba(255,255,255,.045)" stroke="rgba(255,255,255,.16)"/>
+          <rect x="30" y="56" width="60" height="7" rx="3.5" fill="rgba(255,255,255,.4)"/>
+          <rect x="30" y="70" width="94" height="5" rx="2.5" fill="rgba(255,255,255,.16)"/>
+          <rect x="30" y="82" width="78" height="5" rx="2.5" fill="rgba(255,255,255,.16)"/>
+          <rect x="30" y="96" width="36" height="12" rx="6" fill="#ff5386" opacity=".8"/>
+          <text class="s-text-dim" x="18" y="34" font-size="10.5">Frame 1</text>
+        </g>
+        <g class="a-in" style="animation-delay:.24s">
+          <rect x="18" y="146" width="124" height="76" rx="8" fill="rgba(255,255,255,.045)" stroke="rgba(255,255,255,.16)"/>
+          <path d="M34 204l20-24 18 16 24-32 22 26" stroke="#7a5cff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <g class="a-in" style="animation-delay:.38s">
+          <rect x="18" y="250" width="124" height="76" rx="8" fill="rgba(255,255,255,.045)" stroke="rgba(255,255,255,.16)"/>
+          <circle cx="56" cy="288" r="20" fill="none" stroke="#35d6e7" stroke-width="2.4" stroke-dasharray="84 42" transform="rotate(-90 56 288)"/>
+          <rect x="88" y="272" width="40" height="7" rx="3.5" fill="rgba(255,255,255,.3)"/>
+          <rect x="88" y="286" width="30" height="5" rx="2.5" fill="rgba(255,255,255,.16)"/>
+        </g>
+
+        <!-- поток -->
+        <path class="a-flow" d="M150 184h44" stroke="#ff5386" stroke-width="2" fill="none"/>
+        <path class="a-flow" style="animation-delay:-1.7s" d="M150 92c30 0 20 88 44 88" stroke="#ff5386" stroke-width="1.6" fill="none" opacity=".55"/>
+        <path class="a-flow" style="animation-delay:-3.4s" d="M150 288c30 0 20-100 44-100" stroke="#ff5386" stroke-width="1.6" fill="none" opacity=".55"/>
+
+        <!-- колода -->
+        <g class="a-left" style="animation-delay:.5s">
+          <rect x="214" y="36" width="278" height="156" rx="10" fill="#141419" stroke="rgba(255,255,255,.10)" opacity=".5" transform="translate(12,12)"/>
+          <rect x="214" y="36" width="278" height="156" rx="10" fill="#17171d" stroke="rgba(255,255,255,.13)" opacity=".75" transform="translate(6,6)"/>
+          <rect x="214" y="36" width="278" height="156" rx="10" fill="#1c1c23" stroke="rgba(255,255,255,.2)"/>
+          <text x="234" y="72" font-size="17" font-weight="700" fill="#fff" font-family="Manrope, Inter, sans-serif">Квартальный отчёт</text>
+          <rect class="a-caret" x="404" y="58" width="2" height="18" fill="#ff5386"/>
+          <rect x="234" y="84" width="140" height="3" rx="1.5" fill="#ff5386"/>
+          <g fill="rgba(255,255,255,.34)">
+            <rect x="234" y="102" width="180" height="5" rx="2.5"/>
+            <rect x="234" y="114" width="152" height="5" rx="2.5"/>
+            <rect x="234" y="126" width="168" height="5" rx="2.5"/>
+          </g>
+          <!-- фигуры с вектор-хендлами -->
+          <circle cx="440" cy="112" r="22" fill="none" stroke="#35d6e7" stroke-width="2.6" stroke-dasharray="94 42" transform="rotate(-90 440 112)"/>
+          <path d="M440 146l3.4 7 7.7 1.1-5.6 5.4 1.35 7.6-6.85-3.6-6.85 3.6 1.35-7.6-5.6-5.4 7.7-1.1z" fill="none" stroke="#b8f24d" stroke-width="1.8"/>
+          <g class="a-pop" style="animation-delay:1.3s" fill="#0b0b0f" stroke="#b8f24d" stroke-width="1.4">
+            <rect x="424.5" y="142.5" width="5" height="5"/><rect x="450.5" y="142.5" width="5" height="5"/>
+            <rect x="424.5" y="165.5" width="5" height="5"/><rect x="450.5" y="165.5" width="5" height="5"/>
+          </g>
+          <text class="s-text-dim" x="214" y="26" font-size="10.5">Слайд 1 из 12 · 16:9</text>
+        </g>
+
+        <!-- форматы -->
+        <g class="a-in" style="animation-delay:.9s">
+          <rect x="214" y="216" width="104" height="38" rx="10" fill="rgba(255,83,134,.14)" stroke="rgba(255,83,134,.5)"/>
+          <text x="266" y="240" font-size="13.5" font-weight="600" text-anchor="middle" fill="#ff5386" font-family="Inter, sans-serif">.pptx</text>
+          <rect x="328" y="216" width="90" height="38" rx="10" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.18)"/>
+          <text x="373" y="240" font-size="13.5" font-weight="600" text-anchor="middle" fill="rgba(255,255,255,.72)" font-family="Inter, sans-serif">.pdf</text>
+          <rect x="428" y="216" width="64" height="38" rx="10" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.13)"/>
+          <text x="460" y="240" font-size="11.5" text-anchor="middle" fill="rgba(255,255,255,.5)" font-family="Inter, sans-serif">поштучно</text>
+        </g>
+
+        <!-- подпись -->
+        <g class="a-in" style="animation-delay:1.1s">
+          <rect x="214" y="272" width="278" height="66" rx="12" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.10)"/>
+          <circle cx="238" cy="296" r="9" fill="rgba(184,242,77,.16)" stroke="#b8f24d" stroke-width="1.4"/>
+          <path d="M234 296l3 3 5.5-5.8" stroke="#b8f24d" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+          <text class="s-text" x="256" y="294" font-size="12" fill="rgba(255,255,255,.86)" font-weight="600">Текст остаётся текстом</text>
+          <text class="s-text-dim" x="256" y="311" font-size="11">шрифт, цвет, трекинг, ссылки — по символам</text>
+          <text class="s-text-dim" x="238" y="330" font-size="10.5">растрируется только то, что PowerPoint не умеет</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ 2. CHARTS ══════════════════ -->
+<section class="plugin" id="charts" style="--c:var(--violet)">
+  <div class="wrap plugin__in">
+    <div>
+      <span class="plugin__tag reveal"><svg class="ico"><use href="#i-bar"/></svg>Charts</span>
+      <h2 class="reveal d1">Графики, которые <em>остаются слоями</em></h2>
+      <p class="plugin__lead reveal d2">
+        Столбчатые и линейные диаграммы строятся прямо на холсте — фреймами, прямоугольниками и текстом.
+        Значит, любой элемент можно доредактировать руками, а не просить пересобрать весь график заново.
+      </p>
+      <ul class="feats">
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-bar"/></svg></span><span><b>Столбцы</b>: вертикально или горизонтально × рядом, с накоплением или 100% — все четыре сочетания.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-line"/></svg></span><span><b>Линии</b>: прямая, сглаженная или ступенька; маркеры круг / квадрат / ромб с обводкой цветом фона; толщина, пунктир. Пропуски в данных — разрыв, соединить или считать нулём.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-table"/></svg></span><span><b>Таблица данных в панели</b>: правка категорий и значений, добавление серий, переименование, перестановка стрелками.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-dice"/></svg></span><span><b>Кнопка «Рандом»</b> с характером данных — случайно, рост, спад, волна. Для быстрого прототипа, когда цифр ещё нет.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-sort"/></svg></span><span><b>Сортировка категорий</b>: как введено, по значению в обе стороны, по названию А→Я и Я→А.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-palette"/></svg></span><span><b>Оформление</b>: пять палитр, светлая / тёмная / прозрачная тема, скругление столбцов (в том числе только сверху), зазоры между группами и сегментами.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-list"/></svg></span><span><b>Оси и подписи</b>: сетка вдоль значений, категорий или обе, пунктир, легенда сверху или снизу, значения на графике, префикс и суффикс у чисел, разделитель разрядов, «красивые» шаги шкалы.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-layers"/></svg></span><span><b>Результат разложен по группам слоёв</b> — Bars, Lines, Grid, Axis, Legend, Value labels. Не каша из двухсот прямоугольников.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-refresh"/></svg></span><span><b>Настройки живут в самой ноде</b>: выделили график — панель подхватила его конфиг, поправили цифру — «Обновить».</span></li>
+      </ul>
+      <div class="note reveal">
+        <div class="note__t"><svg class="ico"><use href="#i-eye"/></svg>Превью один в один с результатом</div>
+        Математика графика ничего не знает про редактор: она возвращает план примитивов вида
+        <span class="s-mono">{ rect, x, y, w, h, fill }</span>. Один и тот же план материализуют два рендерера —
+        в ноды холста и в SVG для панели. Расхождение превью и результата тут структурно невозможно.
+      </div>
+      <div class="note reveal">
+        <div class="note__t"><svg class="ico"><use href="#i-ruler"/></svg>Подписи не наезжают и не переносятся</div>
+        Отступы под оси зависят от ширины подписи, а реальный шрифт может отличаться от расчётного.
+        Поэтому текст меряется трижды: невидимой пробной нодой в редакторе, через canvas в панели,
+        и эвристикой по символам, если недоступно ни то ни другое.
+      </div>
+      <div class="soon reveal"><span class="chip">Скоро</span> график с заливкой, круговой, кольцевой, точечный</div>
+    </div>
+
+    <div class="art anim plugin__art">
+      <svg viewBox="0 0 520 372" role="img" aria-label="Таблица данных превращается в график">
+        <!-- таблица -->
+        <g class="a-in" style="animation-delay:.1s">
+          <rect x="16" y="44" width="150" height="238" rx="10" fill="rgba(255,255,255,.035)" stroke="rgba(255,255,255,.13)"/>
+          <path d="M16 74h150M76 44v238M126 44v238" stroke="rgba(255,255,255,.09)"/>
+          <text class="s-text-dim" x="28" y="65" font-size="10.5">Кат.</text>
+          <text class="s-text-dim" x="88" y="65" font-size="10.5">2025</text>
+          <text class="s-text-dim" x="136" y="65" font-size="10.5">2026</text>
+          <g class="s-text" font-size="11">
+            <text x="28" y="98">Янв</text><text x="88" y="98">128</text><text x="136" y="98">164</text>
+            <text x="28" y="132">Фев</text><text x="88" y="132">203</text><text x="136" y="132">228</text>
+            <text x="28" y="166">Мар</text><text x="88" y="166">176</text><text x="136" y="166">201</text>
+            <text x="28" y="200">Апр</text><text x="88" y="200">241</text><text x="136" y="200">275</text>
+            <text x="28" y="234">Май</text><text x="88" y="234">198</text><text x="136" y="234">232</text>
+          </g>
+          <g><path d="M16 108h150M16 142h150M16 176h150M16 210h150M16 244h150" stroke="rgba(255,255,255,.055)"/></g>
+          <rect x="26" y="254" width="60" height="18" rx="9" fill="rgba(122,92,255,.18)" stroke="rgba(122,92,255,.55)"/>
+          <text x="56" y="266.5" font-size="10" text-anchor="middle" fill="#a08cff" font-family="Inter, sans-serif">Рандом</text>
+        </g>
+
+        <path class="a-flow" d="M174 164h28" stroke="#7a5cff" stroke-width="2" fill="none"/>
+
+        <!-- график -->
+        <g class="a-in" style="animation-delay:.3s">
+          <rect x="210" y="44" width="294" height="238" rx="10" fill="rgba(255,255,255,.02)" stroke="rgba(255,255,255,.11)"/>
+          <!-- сетка -->
+          <g stroke="rgba(255,255,255,.10)" stroke-dasharray="3 4">
+            <path d="M246 88h240M246 132h240M246 176h240M246 220h240"/>
+          </g>
+          <path d="M246 60v204h240" stroke="rgba(255,255,255,.24)" fill="none"/>
+          <g class="s-text-dim" font-size="9.5" text-anchor="end">
+            <text x="238" y="92">300</text><text x="238" y="136">200</text><text x="238" y="180">100</text><text x="238" y="224">50</text>
+          </g>
+          <!-- столбцы -->
+          <g>
+            <rect class="a-growy" style="animation-delay:.5s"  x="262" y="176" width="30" height="88"  rx="5" fill="#7a5cff" opacity=".85"/>
+            <rect class="a-growy" style="animation-delay:.62s" x="308" y="130" width="30" height="134" rx="5" fill="#7a5cff" opacity=".85"/>
+            <rect class="a-growy" style="animation-delay:.74s" x="354" y="152" width="30" height="112" rx="5" fill="#7a5cff" opacity=".85"/>
+            <rect class="a-growy" style="animation-delay:.86s" x="400" y="108" width="30" height="156" rx="5" fill="#7a5cff" opacity=".85"/>
+            <rect class="a-growy" style="animation-delay:.98s" x="446" y="142" width="30" height="122" rx="5" fill="#7a5cff" opacity=".85"/>
+          </g>
+          <!-- линия -->
+          <path class="a-draw" style="animation-delay:1.2s;stroke-dasharray:420;stroke-dashoffset:420"
+                d="M277 152 L323 108 L369 128 L415 84 L461 116"
+                fill="none" stroke="#35d6e7" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <g fill="#0b0b0f" stroke="#35d6e7" stroke-width="2.2">
+            <circle class="a-pop" style="animation-delay:1.5s"  cx="277" cy="152" r="4.6"/>
+            <circle class="a-pop" style="animation-delay:1.62s" cx="323" cy="108" r="4.6"/>
+            <circle class="a-pop" style="animation-delay:1.74s" cx="369" cy="128" r="4.6"/>
+            <circle class="a-pop" style="animation-delay:1.86s" cx="415" cy="84"  r="4.6"/>
+            <circle class="a-pop" style="animation-delay:1.98s" cx="461" cy="116" r="4.6"/>
+          </g>
+          <g class="s-text-dim" font-size="10" text-anchor="middle">
+            <text x="277" y="280">Янв</text><text x="323" y="280">Фев</text><text x="369" y="280">Мар</text><text x="415" y="280">Апр</text><text x="461" y="280">Май</text>
+          </g>
+          <!-- легенда -->
+          <g class="a-in" style="animation-delay:2.1s">
+            <rect x="368" y="52" width="18" height="9" rx="4.5" fill="#7a5cff"/>
+            <text class="s-text" x="392" y="60.5" font-size="10">2025</text>
+            <rect x="424" y="52" width="18" height="9" rx="4.5" fill="#35d6e7"/>
+            <text class="s-text" x="448" y="60.5" font-size="10">2026</text>
+          </g>
+        </g>
+
+        <!-- группы слоёв -->
+        <g class="a-in" style="animation-delay:2.2s">
+          <text class="s-text-dim" x="16" y="308" font-size="10.5">Слои на холсте</text>
+          <g>
+            <rect x="16" y="318" width="66" height="24" rx="7" fill="rgba(255,255,255,.045)" stroke="rgba(255,255,255,.14)"/>
+            <text class="s-text" x="49" y="334" font-size="10.5" text-anchor="middle">Bars</text>
+            <rect x="90" y="318" width="66" height="24" rx="7" fill="rgba(255,255,255,.045)" stroke="rgba(255,255,255,.14)"/>
+            <text class="s-text" x="123" y="334" font-size="10.5" text-anchor="middle">Lines</text>
+            <rect x="164" y="318" width="66" height="24" rx="7" fill="rgba(255,255,255,.045)" stroke="rgba(255,255,255,.14)"/>
+            <text class="s-text" x="197" y="334" font-size="10.5" text-anchor="middle">Grid</text>
+            <rect x="238" y="318" width="66" height="24" rx="7" fill="rgba(255,255,255,.045)" stroke="rgba(255,255,255,.14)"/>
+            <text class="s-text" x="271" y="334" font-size="10.5" text-anchor="middle">Axis</text>
+            <rect x="312" y="318" width="80" height="24" rx="7" fill="rgba(255,255,255,.045)" stroke="rgba(255,255,255,.14)"/>
+            <text class="s-text" x="352" y="334" font-size="10.5" text-anchor="middle">Legend</text>
+            <rect x="400" y="318" width="104" height="24" rx="7" fill="rgba(255,255,255,.045)" stroke="rgba(255,255,255,.14)"/>
+            <text class="s-text" x="452" y="334" font-size="10.5" text-anchor="middle">Value labels</text>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ 3. COMPMAN ══════════════════ -->
+<section class="plugin" id="compman" style="--c:var(--cyan)">
+  <div class="wrap plugin__in">
+    <div>
+      <span class="plugin__tag reveal"><svg class="ico"><use href="#i-component"/></svg>CompMan</span>
+      <h2 class="reveal d1">Компонент из того, <em>что уже нарисовано</em></h2>
+      <p class="plugin__lead reveal d2">
+        Классическая история: макет сделан копипастой, а компоненты нужны были ещё вчера.
+        CompMan собирает из разрозненных копий настоящий мастер-компонент, а потом сам находит на странице
+        похожие объекты и перепривязывает их все разом — с переносом содержимого в оверрайды.
+      </p>
+      <ul class="feats">
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-component"/></svg></span><span><b>Create component</b> — из выделенных объектов делает мастер и ставит инстансы на их же места, в том же порядке слоёв.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-merge"/></svg></span><span><b>Слияние вариантов</b>: уникальные части остальных выбранных блоков доезжают в мастер скрытыми слотами, и каждый инстанс включает ровно свой набор. Из пяти похожих карточек получается один компонент.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-target"/></svg></span><span><b>Save new main component</b> — запомнить мастер, к которому будем привязываться. Принимает и компонент, и инстанс.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-link"/></svg></span><span><b>Relink по выделению</b>: на месте каждого объекта появляется инстанс с перенесёнными размером, позицией, поворотом и содержимым. Оригинал удаляется только после того, как инстанс успешно создан.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-wand"/></svg></span><span><b>Auto-Relink без выделения</b> — плагин сам обходит страницу, находит похожие объекты, привязывает их все, выделяет результат и показывает: «Привязано объектов: 7 → Card».</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-library"/></svg></span><span><b>Компонент из подключённой библиотеки</b> — если мастера нет в текущем файле, он импортируется из библиотеки по ключу.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-list"/></svg></span><span><b>Переносится всё содержимое</b>: автолейаут и его параметры, радиусы, обводки, заливки, прозрачность, поворот, а в тексте — символы, шрифт (в том числе разный внутри строки), цвета диапазонов, трекинг, интерлиньяж и ссылки.</span></li>
+      </ul>
+      <div class="note reveal">
+        <div class="note__t"><svg class="ico"><use href="#i-similar"/></svg>Похожесть, а не точное совпадение</div>
+        Для каждого объекта строится отпечаток поддерева, и похожесть считается по четырём осям с весами:
+        структура&nbsp;0.50, размер&nbsp;0.22, имя&nbsp;0.16, количество детей&nbsp;0.12. Имена нормализуются —
+        «Frame 12», «Card_2 » и «card» для плагина одно и то же. Порог для чужих инстансов выше, чем для обычных
+        объектов: их подмена заметнее, поэтому и уверенность нужна выше.
+      </div>
+      <div class="note reveal">
+        <div class="note__t"><svg class="ico"><use href="#i-shield"/></svg>Слои матчатся в пять проходов</div>
+        Дети ищут пару по приоритету: имя + тип → только имя → тот же индекс → тип → инстанс к фрейму.
+        «Тот же индекс» — это про варианты, где слот один, а текст в нём разный. И отдельная защита:
+        если структуры принципиально расходятся, узел не трогается вообще — ни размер, ни позиция.
+      </div>
+    </div>
+
+    <div class="art anim plugin__art">
+      <svg viewBox="0 0 520 372" role="img" aria-label="Похожие объекты привязываются к мастер-компоненту">
+        <defs>
+          <radialGradient id="cmglow" cx=".5" cy=".5" r=".5">
+            <stop offset="0" stop-color="#35d6e7" stop-opacity=".34"/><stop offset="1" stop-color="#35d6e7" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <ellipse class="a-glow" cx="260" cy="186" rx="130" ry="108" fill="url(#cmglow)"/>
+
+        <!-- связи -->
+        <g fill="none" stroke="#35d6e7" stroke-width="1.6" opacity=".8">
+          <path class="a-draw-s" style="animation-delay:.7s"  d="M96 82C160 82 176 140 208 162"/>
+          <path class="a-draw-s" style="animation-delay:.85s" d="M96 292C160 292 180 236 210 208"/>
+          <path class="a-draw-s" style="animation-delay:1s"   d="M424 74C368 74 336 122 312 156"/>
+          <path class="a-draw-s" style="animation-delay:1.15s" d="M446 190C392 190 356 186 314 184"/>
+          <path class="a-draw-s" style="animation-delay:1.3s" d="M424 302C368 302 336 250 312 212" stroke="rgba(255,255,255,.22)" stroke-dasharray="4 6"/>
+        </g>
+
+        <!-- карточки-источники -->
+        <g class="a-in" style="animation-delay:.1s">
+          <rect x="26" y="52" width="140" height="60" rx="9" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.16)"/>
+          <rect x="38" y="64" width="24" height="24" rx="6" fill="rgba(255,255,255,.14)"/>
+          <rect x="70" y="66" width="66" height="6" rx="3" fill="rgba(255,255,255,.36)"/>
+          <rect x="70" y="78" width="48" height="5" rx="2.5" fill="rgba(255,255,255,.16)"/>
+          <rect x="38" y="94" width="60" height="9" rx="4.5" fill="#35d6e7" opacity=".55"/>
+        </g>
+        <g class="a-in" style="animation-delay:.2s">
+          <rect x="26" y="262" width="140" height="60" rx="9" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.16)"/>
+          <rect x="38" y="274" width="24" height="24" rx="6" fill="rgba(255,255,255,.14)"/>
+          <rect x="70" y="276" width="52" height="6" rx="3" fill="rgba(255,255,255,.36)"/>
+          <rect x="70" y="288" width="62" height="5" rx="2.5" fill="rgba(255,255,255,.16)"/>
+          <rect x="38" y="304" width="48" height="9" rx="4.5" fill="#35d6e7" opacity=".55"/>
+        </g>
+        <g class="a-in" style="animation-delay:.3s">
+          <rect x="354" y="44" width="140" height="60" rx="9" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.16)"/>
+          <rect x="366" y="56" width="24" height="24" rx="6" fill="rgba(255,255,255,.14)"/>
+          <rect x="398" y="58" width="72" height="6" rx="3" fill="rgba(255,255,255,.36)"/>
+          <rect x="398" y="70" width="40" height="5" rx="2.5" fill="rgba(255,255,255,.16)"/>
+          <rect x="366" y="86" width="56" height="9" rx="4.5" fill="#35d6e7" opacity=".55"/>
+        </g>
+        <g class="a-in" style="animation-delay:.4s">
+          <rect x="376" y="160" width="126" height="52" rx="9" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.16)"/>
+          <rect x="388" y="172" width="20" height="20" rx="5" fill="rgba(255,255,255,.14)"/>
+          <rect x="416" y="174" width="60" height="6" rx="3" fill="rgba(255,255,255,.36)"/>
+          <rect x="416" y="186" width="42" height="5" rx="2.5" fill="rgba(255,255,255,.16)"/>
+        </g>
+        <g class="a-in" style="animation-delay:.5s">
+          <rect x="354" y="272" width="140" height="60" rx="9" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.16)"/>
+          <rect x="366" y="284" width="24" height="24" rx="6" fill="rgba(255,255,255,.14)"/>
+          <rect x="398" y="286" width="58" height="6" rx="3" fill="rgba(255,255,255,.36)"/>
+          <rect x="398" y="298" width="66" height="5" rx="2.5" fill="rgba(255,255,255,.16)"/>
+          <rect x="366" y="314" width="52" height="9" rx="4.5" fill="#35d6e7" opacity=".55"/>
+        </g>
+
+        <!-- мастер -->
+        <g class="a-pop" style="animation-delay:.5s">
+          <rect x="204" y="130" width="112" height="112" rx="14" fill="rgba(53,214,231,.10)" stroke="#35d6e7" stroke-width="1.8"/>
+          <path d="M260 156l13 13-13 13-13-13z" fill="#35d6e7"/>
+          <path d="M260 182l13 13-13 13-13-13z" fill="#35d6e7" opacity=".45"/>
+          <text x="260" y="232" font-size="11.5" font-weight="700" text-anchor="middle" fill="#35d6e7" font-family="Manrope, Inter, sans-serif">Master</text>
+        </g>
+        <text class="s-text-dim a-in" style="animation-delay:.6s" x="260" y="122" font-size="10.5" text-anchor="middle">main component «Card»</text>
+
+        <!-- бейджи похожести -->
+        <g font-family="Inter, sans-serif" font-size="10" font-weight="600">
+          <g class="a-pop" style="animation-delay:1.5s"><rect x="150" y="96" width="42" height="19" rx="9.5" fill="#0b0b0f" stroke="#35d6e7" opacity=".95"/><text x="171" y="109.5" text-anchor="middle" fill="#35d6e7">0.91</text></g>
+          <g class="a-pop" style="animation-delay:1.62s"><rect x="152" y="238" width="42" height="19" rx="9.5" fill="#0b0b0f" stroke="#35d6e7" opacity=".95"/><text x="173" y="251.5" text-anchor="middle" fill="#35d6e7">0.86</text></g>
+          <g class="a-pop" style="animation-delay:1.74s"><rect x="330" y="104" width="42" height="19" rx="9.5" fill="#0b0b0f" stroke="#35d6e7" opacity=".95"/><text x="351" y="117.5" text-anchor="middle" fill="#35d6e7">0.88</text></g>
+          <g class="a-pop" style="animation-delay:1.86s"><rect x="332" y="176" width="42" height="19" rx="9.5" fill="#0b0b0f" stroke="#35d6e7" opacity=".95"/><text x="353" y="189.5" text-anchor="middle" fill="#35d6e7">0.79</text></g>
+          <g class="a-pop" style="animation-delay:1.98s"><rect x="330" y="244" width="42" height="19" rx="9.5" fill="#0b0b0f" stroke="rgba(255,255,255,.3)" opacity=".95"/><text x="351" y="257.5" text-anchor="middle" fill="rgba(255,255,255,.45)">0.61</text></g>
+        </g>
+
+        <!-- итог -->
+        <g class="a-in" style="animation-delay:2.2s">
+          <rect x="122" y="336" width="276" height="28" rx="14" fill="rgba(53,214,231,.12)" stroke="rgba(53,214,231,.45)"/>
+          <text x="260" y="354.5" font-size="12" font-weight="600" text-anchor="middle" fill="#8ae9f3" font-family="Inter, sans-serif">Привязано объектов: 4 → «Card»</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ 4. GRAMMMAN ══════════════════ -->
+<section class="plugin" id="gramm" style="--c:var(--lime)">
+  <div class="wrap plugin__in">
+    <div>
+      <span class="plugin__tag reveal"><svg class="ico"><use href="#i-spell"/></svg>GrammMan</span>
+      <h2 class="reveal d1">Орфография и типографика — <em>прямо в макете</em></h2>
+      <p class="plugin__lead reveal d2">
+        Сканирует все текстовые слои страницы, находит ошибки и нарушения правил русской типографики,
+        показывает их карточками с вариантами замены и правит прямо на холсте. Не нужно выгружать тексты
+        в документ и вручную переносить обратно.
+      </p>
+      <ul class="feats">
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-scan"/></svg></span><span><b>Скан всей страницы</b> одной кнопкой, с бейджами-счётчиками на вкладках «Ошибки» и «Типограф».</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-rules"/></svg></span><span><b>17 правил типографа</b> чекбоксами: ёфикатор, кавычки-ёлочки, тире и дефисы, многоточие, телефоны, единицы файлов, сокращения с точками, разряды чисел, математические символы, даты и время, окончания, точки в заголовках, лишние пробелы, КАПС, косая черта, пунктуация и «разное».</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-target"/></svg></span><span><b>Карточка ошибки со ссылкой на слой</b>: «Показать 3/7» выделяет и приближает нужный текст, стрелки перелистывают вхождения.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-bolt"/></svg></span><span><b>«Применить все»</b> — исправить всё правило разом, по всем найденным словам.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-eye"/></svg></span><span><b>Списки игнора сохраняются</b> между запусками, отдельно для орфографии и для типографа. Бренд, написанный «неправильно» специально, больше не будет всплывать.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-ai"/></svg></span><span><b>ИИ-редактор выделенного текста</b>: сделать лучше, короче, длиннее или перевести — с превью результата и кнопкой «Заменить». Провайдер на выбор, ключ хранится отдельно для каждого.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-resize"/></svg></span><span><b>Онбординг из пяти экранов</b> и окно, которое тянется мышью и запоминает размер.</span></li>
+      </ul>
+      <div class="note reveal">
+        <div class="note__t"><svg class="ico"><use href="#i-ruler"/></svg>Позиции ошибок не «съезжают»</div>
+        Замена делается по позиции в строке. Если после правки длина текста изменилась — а она почти всегда меняется —
+        слой точечно пересканируется, и позиции оставшихся ошибок пересчитываются. Иначе после первого исправления
+        все следующие показывали бы не на те буквы.
+      </div>
+      <div class="note reveal">
+        <div class="note__t"><svg class="ico"><use href="#i-shield"/></svg>Словарь лежит внутри плагина</div>
+        В сборку вшит русский словарь: около 146 тысяч словоформ и полторы тысячи аффиксных правил,
+        проверка запускается в отдельном воркере, чтобы панель не подвисала.
+      </div>
+    </div>
+
+    <div class="art anim plugin__art">
+      <svg viewBox="0 0 520 372" role="img" aria-label="Ошибки в тексте макета и правила типографа">
+        <!-- панель текста -->
+        <g class="a-in" style="animation-delay:.1s">
+          <rect x="16" y="40" width="256" height="292" rx="12" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.12)"/>
+          <text class="s-text-dim" x="32" y="64" font-size="10.5">Текстовые слои страницы</text>
+
+          <!-- счётчик -->
+          <g>
+            <rect x="188" y="50" width="68" height="20" rx="10" fill="rgba(255,83,134,.16)" stroke="rgba(255,83,134,.5)" class="a-was"/>
+            <text x="222" y="64" font-size="10.5" text-anchor="middle" fill="#ff8fb0" font-family="Inter, sans-serif" class="a-was">Ошибок 12</text>
+            <rect x="188" y="50" width="68" height="20" rx="10" fill="rgba(184,242,77,.16)" stroke="rgba(184,242,77,.5)" class="a-now"/>
+            <text x="222" y="64" font-size="10.5" text-anchor="middle" fill="#cdf777" font-family="Inter, sans-serif" class="a-now">Ошибок 0</text>
+          </g>
+
+          <!-- строки -->
+          <g fill="rgba(255,255,255,.26)">
+            <rect x="32" y="86" width="180" height="7" rx="3.5"/>
+            <rect x="32" y="104" width="212" height="7" rx="3.5"/>
+            <rect x="32" y="140" width="196" height="7" rx="3.5"/>
+            <rect x="32" y="176" width="168" height="7" rx="3.5"/>
+            <rect x="32" y="212" width="204" height="7" rx="3.5"/>
+            <rect x="32" y="248" width="150" height="7" rx="3.5"/>
+          </g>
+          <!-- слова с ошибкой -->
+          <rect x="88" y="120" width="56" height="9" rx="4" fill="rgba(255,83,134,.34)"/>
+          <rect x="140" y="192" width="46" height="9" rx="4" fill="rgba(255,83,134,.34)"/>
+          <rect x="60" y="264" width="64" height="9" rx="4" fill="rgba(255,83,134,.34)"/>
+
+          <!-- волнистые подчёркивания -->
+          <g class="a-squig" fill="none" stroke="#ff5386" stroke-width="1.6">
+            <path d="M88 133q3.5-4 7 0t7 0 7 0 7 0 7 0 7 0 7 0 7 0"/>
+          </g>
+          <g class="a-squig" style="animation-delay:.4s" fill="none" stroke="#ff5386" stroke-width="1.6">
+            <path d="M140 205q3.5-4 7 0t7 0 7 0 7 0 7 0 7 0 7 0"/>
+          </g>
+          <g class="a-squig" style="animation-delay:.8s" fill="none" stroke="#ff5386" stroke-width="1.6">
+            <path d="M60 277q3.5-4 7 0t7 0 7 0 7 0 7 0 7 0 7 0 7 0 7 0"/>
+          </g>
+
+          <!-- галочки -->
+          <g stroke="#b8f24d" stroke-width="1.8" fill="none" stroke-linecap="round">
+            <path class="a-fixed" d="M154 126l3 3 5.5-6"/>
+            <path class="a-fixed" style="animation-delay:.25s" d="M196 198l3 3 5.5-6"/>
+            <path class="a-fixed" style="animation-delay:.5s" d="M134 270l3 3 5.5-6"/>
+          </g>
+
+          <!-- кнопка -->
+          <rect x="32" y="296" width="132" height="24" rx="12" fill="rgba(184,242,77,.14)" stroke="rgba(184,242,77,.5)"/>
+          <text x="98" y="312" font-size="11" text-anchor="middle" fill="#cdf777" font-family="Inter, sans-serif">Применить все</text>
+        </g>
+
+        <!-- карточки правил -->
+        <g class="a-in" style="animation-delay:.35s">
+          <text class="s-text-dim" x="292" y="64" font-size="10.5">Типограф</text>
+
+          <g>
+            <rect x="292" y="76" width="212" height="66" rx="11" fill="rgba(255,255,255,.035)" stroke="rgba(255,255,255,.12)"/>
+            <text class="s-text" x="308" y="98" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.86)">Кавычки-ёлочки</text>
+            <text class="s-mono a-was" x="308" y="122" font-size="14" fill="rgba(255,255,255,.42)">"Эвер"</text>
+            <text class="s-mono a-now" x="308" y="122" font-size="14" fill="#b8f24d">«Эвер»</text>
+            <g class="a-now"><path d="M470 112h14M478 106l6 6-6 6" stroke="#b8f24d" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+          </g>
+
+          <g>
+            <rect x="292" y="152" width="212" height="66" rx="11" fill="rgba(255,255,255,.035)" stroke="rgba(255,255,255,.12)"/>
+            <text class="s-text" x="308" y="174" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.86)">Тире и разряды</text>
+            <text class="s-mono a-was" style="animation-delay:.3s" x="308" y="198" font-size="14" fill="rgba(255,255,255,.42)">2024-2026</text>
+            <text class="s-mono a-now" style="animation-delay:.3s" x="308" y="198" font-size="14" fill="#b8f24d">2024–2026</text>
+          </g>
+
+          <g>
+            <rect x="292" y="228" width="212" height="66" rx="11" fill="rgba(255,255,255,.035)" stroke="rgba(255,255,255,.12)"/>
+            <text class="s-text" x="308" y="250" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.86)">Ёфикатор</text>
+            <text class="s-mono a-was" style="animation-delay:.6s" x="308" y="274" font-size="14" fill="rgba(255,255,255,.42)">все ещe</text>
+            <text class="s-mono a-now" style="animation-delay:.6s" x="308" y="274" font-size="14" fill="#b8f24d">всё ещё</text>
+          </g>
+
+          <g>
+            <rect x="292" y="304" width="212" height="28" rx="14" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.1)"/>
+            <text class="s-text-dim" x="398" y="322" font-size="10.5" text-anchor="middle">…и ещё 14 правил на выбор</text>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ 5. CONTRAST ══════════════════ -->
+<section class="plugin" id="contrast" style="--c:var(--amber)">
+  <div class="wrap plugin__in">
+    <div>
+      <span class="plugin__tag reveal"><svg class="ico"><use href="#i-contrast"/></svg>ContrastPlugin</span>
+      <h2 class="reveal d1">Контраст по WCAG, посчитанный по тому, <em>что реально видно</em></h2>
+      <p class="plugin__lead reveal d2">
+        Показывает коэффициент контраста выделенного элемента с фактическим фоном под ним, сканирует
+        страницу на проблемные тексты и даёт палитру, на которой прямо нарисована граница прохождения.
+      </p>
+      <ul class="feats">
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-badge"/></svg></span><span><b>Все критерии WCAG</b>: обычный текст — AA от 4.5:1 и AAA от 7:1, крупный — AA от 3:1 и AAA от 4.5:1, нетекстовые элементы — AA от 3:1. Бейдж с подсказкой «Passed AA / Contrast of 4.5:1».</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-eye"/></svg></span><span><b>Живое превью пары цветов</b>: форма подстраивается под тип объекта — текст, овал, полигон, звезда, линия, вектор. HEX копируется кликом.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-scan"/></svg></span><span><b>Скан страницы</b> с сортировкой от худшего: сначала то, что провалилось сильнее всего. Клик по строке — переход к слою на холсте.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-droplet"/></svg></span><span><b>Палитра, которая сразу красит</b>: выбранный цвет применяется к выделенному объекту в макете, а коэффициент пересчитывается на лету.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-refresh"/></svg></span><span><b>Пересчёт при любом изменении</b> — подвинули элемент на другой фон или перекрасили, число обновилось само.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-shapes"/></svg></span><span><b>Честные особые состояния</b>: «в элементе несколько цветов» и «под элементом изображение» — вместо выдуманной цифры плагин говорит, что посчитать нельзя.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-lang"/></svg></span><span><b>Три языка интерфейса</b>: русский, английский, 中文.</span></li>
+      </ul>
+      <div class="note reveal">
+        <div class="note__t"><svg class="ico"><use href="#i-layers"/></svg>Фон определяется по стопке слоёв</div>
+        Плагин восстанавливает настоящий z-порядок сравнением путей предков, собирает стек перекрывающихся
+        заливок под элементом и сворачивает его альфа-композитингом — подкладывая фон страницы под полупрозрачные слои.
+        Поэтому контраст считается по фактически видимому цвету, а не по номинальному HEX заливки.
+      </div>
+      <div class="note reveal">
+        <div class="note__t"><svg class="ico"><use href="#i-percent"/></svg>Граница контраста прямо на палитре</div>
+        По матрице 101 × 101 значений насыщенности и яркости ищется линия перехода через порог,
+        точки уточняются интерполяцией, сглаживаются кривыми Безье и рисуются поверх палитры.
+        Видно, до какого места цвет ещё проходит.
+      </div>
+    </div>
+
+    <div class="art anim plugin__art">
+      <svg viewBox="0 0 520 372" role="img" aria-label="Проверка контраста и палитра с границей прохождения">
+        <defs>
+          <linearGradient id="satg" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#ffb020"/>
+          </linearGradient>
+          <linearGradient id="valg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000"/>
+          </linearGradient>
+        </defs>
+
+        <!-- образец -->
+        <g class="a-in" style="animation-delay:.1s">
+          <rect x="16" y="44" width="248" height="140" rx="14" fill="#ffb020"/>
+          <text x="40" y="106" font-size="40" font-weight="800" fill="#171208" font-family="Manrope, Inter, sans-serif">Aa</text>
+          <rect x="118" y="82" width="122" height="8" rx="4" fill="#171208" opacity=".72"/>
+          <rect x="118" y="98" width="94" height="8" rx="4" fill="#171208" opacity=".45"/>
+          <rect x="40" y="132" width="200" height="7" rx="3.5" fill="#171208" opacity=".3"/>
+          <rect x="40" y="148" width="150" height="7" rx="3.5" fill="#171208" opacity=".3"/>
+        </g>
+        <g class="a-in" style="animation-delay:.3s" font-family="Inter, sans-serif" font-size="10.5">
+          <rect x="16" y="194" width="82" height="24" rx="7" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.15)"/>
+          <circle cx="30" cy="206" r="5" fill="#171208" stroke="rgba(255,255,255,.3)"/>
+          <text x="42" y="210" fill="rgba(255,255,255,.7)">#171208</text>
+          <rect x="106" y="194" width="82" height="24" rx="7" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.15)"/>
+          <circle cx="120" cy="206" r="5" fill="#ffb020"/>
+          <text x="132" y="210" fill="rgba(255,255,255,.7)">#FFB020</text>
+        </g>
+
+        <!-- коэффициент -->
+        <g class="a-in" style="animation-delay:.5s">
+          <text class="s-text-dim" x="16" y="252" font-size="10.5">Коэффициент контраста</text>
+          <g font-family="Manrope, Inter, sans-serif" font-weight="800" font-size="46">
+            <text class="a-s1" x="16" y="298" fill="#ff5386">2.1<tspan font-size="20" fill="rgba(255,255,255,.4)">:1</tspan></text>
+            <text class="a-s2" x="16" y="298" fill="#ffb020">4.6<tspan font-size="20" fill="rgba(255,255,255,.4)">:1</tspan></text>
+            <text class="a-s3" x="16" y="298" fill="#b8f24d">9.4<tspan font-size="20" fill="rgba(255,255,255,.4)">:1</tspan></text>
+          </g>
+          <!-- бейджи -->
+          <g font-family="Inter, sans-serif" font-size="11" font-weight="700">
+            <g class="a-s1">
+              <rect x="16" y="316" width="52" height="24" rx="7" fill="rgba(255,83,134,.15)" stroke="rgba(255,83,134,.5)"/>
+              <text x="42" y="332" text-anchor="middle" fill="#ff8fb0">AA ✕</text>
+              <rect x="76" y="316" width="62" height="24" rx="7" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.14)"/>
+              <text x="107" y="332" text-anchor="middle" fill="rgba(255,255,255,.34)">AAA ✕</text>
+            </g>
+            <g class="a-s2">
+              <rect x="16" y="316" width="52" height="24" rx="7" fill="rgba(184,242,77,.15)" stroke="rgba(184,242,77,.55)"/>
+              <text x="42" y="332" text-anchor="middle" fill="#cdf777">AA ✓</text>
+              <rect x="76" y="316" width="62" height="24" rx="7" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.14)"/>
+              <text x="107" y="332" text-anchor="middle" fill="rgba(255,255,255,.34)">AAA ✕</text>
+            </g>
+            <g class="a-s3">
+              <rect x="16" y="316" width="52" height="24" rx="7" fill="rgba(184,242,77,.15)" stroke="rgba(184,242,77,.55)"/>
+              <text x="42" y="332" text-anchor="middle" fill="#cdf777">AA ✓</text>
+              <rect x="76" y="316" width="62" height="24" rx="7" fill="rgba(184,242,77,.15)" stroke="rgba(184,242,77,.55)"/>
+              <text x="107" y="332" text-anchor="middle" fill="#cdf777">AAA ✓</text>
+            </g>
+          </g>
+        </g>
+
+        <!-- палитра -->
+        <g class="a-in" style="animation-delay:.7s">
+          <text class="s-text-dim" x="296" y="36" font-size="10.5">Палитра с границей 3:1</text>
+          <rect x="296" y="44" width="208" height="208" rx="12" fill="url(#satg)"/>
+          <rect x="296" y="44" width="208" height="208" rx="12" fill="url(#valg)"/>
+          <rect x="296" y="44" width="208" height="208" rx="12" fill="none" stroke="rgba(255,255,255,.16)"/>
+          <path class="a-draw" style="animation-delay:1s;stroke-dasharray:340;stroke-dashoffset:340"
+                d="M296 128C340 132 372 146 404 168 432 188 456 210 504 218"
+                fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+          <text x="312" y="86" font-size="10" fill="rgba(0,0,0,.55)" font-family="Inter, sans-serif">проходит</text>
+          <text x="404" y="240" font-size="10" fill="rgba(255,255,255,.65)" font-family="Inter, sans-serif">не проходит</text>
+          <g class="a-bob">
+            <circle cx="368" cy="152" r="11" fill="none" stroke="#fff" stroke-width="2.4"/>
+            <circle cx="368" cy="152" r="5" fill="#e0952c"/>
+          </g>
+          <!-- слайдеры -->
+          <rect x="296" y="266" width="208" height="12" rx="6" fill="rgba(255,255,255,.14)"/>
+          <rect x="296" y="266" width="208" height="12" rx="6" fill="url(#satg)" opacity=".55"/>
+          <circle class="a-bob2" cx="392" cy="272" r="8" fill="#fff"/>
+          <rect x="296" y="292" width="208" height="12" rx="6" fill="rgba(255,255,255,.1)"/>
+          <circle class="a-bob2" style="animation-delay:-2s" cx="440" cy="298" r="8" fill="#fff"/>
+          <g class="a-in" style="animation-delay:1.4s">
+            <rect x="296" y="318" width="208" height="26" rx="13" fill="rgba(255,176,32,.12)" stroke="rgba(255,176,32,.45)"/>
+            <text x="400" y="335" font-size="11" text-anchor="middle" fill="#ffcf7a" font-family="Inter, sans-serif">цвет применяется к слою сразу</text>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ 6. STYLES ══════════════════ -->
+<section class="plugin" id="styles" style="--c:var(--orchid)">
+  <div class="wrap plugin__in">
+    <div>
+      <span class="plugin__tag reveal"><svg class="ico"><use href="#i-variable"/></svg>Styles &amp; Variables Organizer</span>
+      <h2 class="reveal d1">Аудит дизайн-системы: <em>что привязано, а что висит</em></h2>
+      <p class="plugin__lead reveal d2">
+        Сканирует выделение, страницу или весь документ, группирует одинаковые цвета, тексты и числа
+        и показывает, какая доля из них привязана к командным стилям и переменным, а какая — вообще ни к чему.
+        А потом сводит всю группу к одному источнику в один клик.
+      </p>
+      <ul class="feats">
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-palette"/></svg></span><span><b>Четыре категории</b>: цветовые переменные, цветовые стили, числовые переменные и текстовые стили.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-droplet"/></svg></span><span><b>Цвета с разбором по подтипу</b> — заливка, обводка, заливка текста. Видно не просто «этот оттенок 24 раза», а где именно он живёт.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-text"/></svg></span><span><b>Текст группируется честно</b>: в ключ входят не только гарнитура, начертание и кегль, но и интерлиньяж с трекингом — тексты с разными настройками не сольются молча.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-ruler"/></svg></span><span><b>Числа</b>: радиусы углов, отступы автолейаута, кегль, интерлиньяж, трекинг. Группы сортируются по возрастанию — сразу видна шкала 0, 2, 4, 8, 16.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-percent"/></svg></span><span><b>Полоса статистики</b>: сколько процентов на командных стилях, локальных, переменных и без привязки.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-merge"/></svg></span><span><b>Merge и Merge All</b>: свести группу к выбранному стилю или переменной — или сразу все группы к самой используемой цели, с приоритетом у командных.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-filter"/></svg></span><span><b>Можно свести только часть</b> — только обводки, только заливки текста, только радиусы углов. Раскрывающаяся разбивка «No Link» показывает, из чего именно состоит группа.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-wand"/></svg></span><span><b>Создание стиля или переменной из группы</b> — с именем, HEX и прозрачностью; создаётся и тут же применяется ко всем непривязанным элементам.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-undo"/></svg></span><span><b>Опции скана и один Undo</b>: пропускать скрытые слои, пропускать содержимое инстансов, идти по всем страницам. Все правки откатываются одним шагом.</span></li>
+      </ul>
+      <div class="note reveal">
+        <div class="note__t"><svg class="ico"><use href="#i-bolt"/></svg>Рассчитан на большой файл</div>
+        Видимость слоя и «лежит внутри инстанса» мемоизируются вверх по дереву, стили и переменные
+        прогреваются одним пакетным запросом вместо тысяч точечных, а обход отдаёт управление каждые 500 узлов,
+        чтобы интерфейс оставался живым. Результат скана кэшируется по сигнатуре, поэтому merge
+        не запускает полный обход заново.
+      </div>
+      <div class="soon reveal"><span class="chip">Скоро</span> строковые переменные и стили эффектов</div>
+    </div>
+
+    <div class="art anim plugin__art">
+      <svg viewBox="0 0 520 372" role="img" aria-label="Аудит стилей: статистика привязок и сведение групп">
+        <!-- статистика -->
+        <g class="a-in" style="animation-delay:.1s">
+          <text class="s-text-dim" x="16" y="36" font-size="10.5">Привязка значений на странице</text>
+          <g class="a-growx" style="animation-delay:.3s">
+            <rect x="16" y="46" width="488" height="18" rx="9" fill="rgba(255,255,255,.07)"/>
+            <path d="M16 55h236" stroke="#c77dff" stroke-width="18" stroke-linecap="round" opacity=".9"/>
+            <path d="M258 55h104" stroke="#7a5cff" stroke-width="18" stroke-linecap="round" opacity=".85"/>
+            <path d="M368 55h60" stroke="#35d6e7" stroke-width="18" stroke-linecap="round" opacity=".8"/>
+            <path d="M434 55h62" stroke="#ff5386" stroke-width="18" stroke-linecap="round" opacity=".8"/>
+          </g>
+          <g font-family="Inter, sans-serif" font-size="10" class="a-in" style="animation-delay:.7s">
+            <circle cx="22" cy="80" r="4" fill="#c77dff"/><text x="32" y="83.5" fill="rgba(255,255,255,.62)">Team 46%</text>
+            <circle cx="130" cy="80" r="4" fill="#7a5cff"/><text x="140" y="83.5" fill="rgba(255,255,255,.62)">Local 21%</text>
+            <circle cx="238" cy="80" r="4" fill="#35d6e7"/><text x="248" y="83.5" fill="rgba(255,255,255,.62)">Variable 12%</text>
+            <circle cx="360" cy="80" r="4" fill="#ff5386"/><text x="370" y="83.5" fill="rgba(255,255,255,.62)">No Link 21%</text>
+          </g>
+        </g>
+
+        <!-- таблица -->
+        <g class="a-in" style="animation-delay:.4s">
+          <rect x="16" y="100" width="488" height="212" rx="12" fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.11)"/>
+          <g class="s-text-dim" font-size="10">
+            <text x="34" y="124">Цвет</text><text x="150" y="124">Стиль / переменная</text><text x="332" y="124">Исп.</text><text x="400" y="124">Статус</text>
+          </g>
+          <path d="M16 134h488" stroke="rgba(255,255,255,.09)"/>
+
+          <!-- строки -->
+          <g font-family="Inter, sans-serif" font-size="11">
+            <!-- 1 -->
+            <g><rect x="32" y="146" width="18" height="18" rx="5" fill="#c77dff"/>
+              <text x="60" y="159" fill="rgba(255,255,255,.72)">#C77DFF</text>
+              <text x="150" y="159" fill="rgba(255,255,255,.5)">brand/primary</text>
+              <text x="332" y="159" fill="rgba(255,255,255,.5)">×48</text>
+              <rect x="400" y="146" width="52" height="18" rx="9" fill="rgba(199,125,255,.18)" stroke="rgba(199,125,255,.5)"/>
+              <text x="426" y="159" text-anchor="middle" fill="#dab0ff" font-size="10">Team</text>
+            </g>
+            <!-- 2 -->
+            <g><rect x="32" y="180" width="18" height="18" rx="5" fill="#4d8dff"/>
+              <text x="60" y="193" fill="rgba(255,255,255,.72)">#4D8DFF</text>
+              <text class="a-was" x="150" y="193" fill="rgba(255,255,255,.34)">— не привязан —</text>
+              <text class="a-now" x="150" y="193" fill="rgba(255,255,255,.5)">accent/blue</text>
+              <text x="332" y="193" fill="rgba(255,255,255,.5)">×31</text>
+              <g class="a-was"><rect x="400" y="180" width="62" height="18" rx="9" fill="rgba(255,83,134,.16)" stroke="rgba(255,83,134,.5)"/>
+                <text x="431" y="193" text-anchor="middle" fill="#ff8fb0" font-size="10">No Link</text></g>
+              <g class="a-now"><rect x="400" y="180" width="62" height="18" rx="9" fill="rgba(199,125,255,.18)" stroke="rgba(199,125,255,.5)"/>
+                <text x="431" y="193" text-anchor="middle" fill="#dab0ff" font-size="10">Var Team</text></g>
+            </g>
+            <!-- 3 -->
+            <g><rect x="32" y="214" width="18" height="18" rx="5" fill="#35e0a1"/>
+              <text x="60" y="227" fill="rgba(255,255,255,.72)">#35E0A1</text>
+              <text class="a-was" style="animation-delay:.4s" x="150" y="227" fill="rgba(255,255,255,.34)">— не привязан —</text>
+              <text class="a-now" style="animation-delay:.4s" x="150" y="227" fill="rgba(255,255,255,.5)">state/success</text>
+              <text x="332" y="227" fill="rgba(255,255,255,.5)">×17</text>
+              <g class="a-was" style="animation-delay:.4s"><rect x="400" y="214" width="62" height="18" rx="9" fill="rgba(255,83,134,.16)" stroke="rgba(255,83,134,.5)"/>
+                <text x="431" y="227" text-anchor="middle" fill="#ff8fb0" font-size="10">No Link</text></g>
+              <g class="a-now" style="animation-delay:.4s"><rect x="400" y="214" width="62" height="18" rx="9" fill="rgba(122,92,255,.2)" stroke="rgba(122,92,255,.55)"/>
+                <text x="431" y="227" text-anchor="middle" fill="#b7a5ff" font-size="10">Local</text></g>
+            </g>
+            <!-- 4 -->
+            <g><rect x="32" y="248" width="18" height="18" rx="5" fill="#ffb020"/>
+              <text x="60" y="261" fill="rgba(255,255,255,.72)">#FFB020</text>
+              <text class="a-was" style="animation-delay:.8s" x="150" y="261" fill="rgba(255,255,255,.34)">— не привязан —</text>
+              <text class="a-now" style="animation-delay:.8s" x="150" y="261" fill="rgba(255,255,255,.5)">state/warning</text>
+              <text x="332" y="261" fill="rgba(255,255,255,.5)">×9</text>
+              <g class="a-was" style="animation-delay:.8s"><rect x="400" y="248" width="62" height="18" rx="9" fill="rgba(255,83,134,.16)" stroke="rgba(255,83,134,.5)"/>
+                <text x="431" y="261" text-anchor="middle" fill="#ff8fb0" font-size="10">No Link</text></g>
+              <g class="a-now" style="animation-delay:.8s"><rect x="400" y="248" width="62" height="18" rx="9" fill="rgba(199,125,255,.18)" stroke="rgba(199,125,255,.5)"/>
+                <text x="431" y="261" text-anchor="middle" fill="#dab0ff" font-size="10">Team</text></g>
+            </g>
+          </g>
+
+          <!-- merge all -->
+          <g class="a-in" style="animation-delay:1.1s">
+            <rect x="32" y="280" width="164" height="24" rx="12" fill="rgba(199,125,255,.15)" stroke="rgba(199,125,255,.5)"/>
+            <text x="114" y="296" font-size="11" text-anchor="middle" fill="#dab0ff" font-family="Inter, sans-serif">Merge All → Most Used</text>
+            <rect x="206" y="280" width="120" height="24" rx="12" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.14)"/>
+            <text x="266" y="296" font-size="11" text-anchor="middle" fill="rgba(255,255,255,.55)" font-family="Inter, sans-serif">Skip hidden</text>
+            <rect x="336" y="280" width="132" height="24" rx="12" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.14)"/>
+            <text x="402" y="296" font-size="11" text-anchor="middle" fill="rgba(255,255,255,.55)" font-family="Inter, sans-serif">Все страницы</text>
+          </g>
+        </g>
+
+        <g class="a-in" style="animation-delay:1.3s">
+          <path d="M16 336h488" stroke="rgba(255,255,255,.08)"/>
+          <text class="s-text-dim" x="16" y="358" font-size="10.5">Клик по строке выделяет слои на холсте · все правки — один шаг Undo</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ 7. CHOOSEMAN ══════════════════ -->
+<section class="plugin" id="chooseman" style="--c:var(--blue)">
+  <div class="wrap plugin__in">
+    <div>
+      <span class="plugin__tag reveal"><svg class="ico"><use href="#i-search"/></svg>ChooseMan</span>
+      <h2 class="reveal d1">Найти все слои — <em>и заменить разом</em></h2>
+      <p class="plugin__lead reveal d2">
+        Выбирает на странице все объекты нужного типа, у которых в имени или в самом тексте есть заданная подстрока,
+        и тут же меняет найденное во всех сразу. Заодно это инструмент массового переименования слоёв.
+      </p>
+      <ul class="feats">
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-filter"/></svg></span><span><b>Семь типов объектов</b>: текст, шейп или картинка, группа, фрейм, автолейаут, компонент, инстанс.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-text"/></svg></span><span><b>Два режима для текста</b> — искать по имени слоя или по содержимому. Для остальных типов — по имени.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-replace"/></svg></span><span><b>Замена подстроки, а не всей строки</b>: меняется только найденное вхождение, остальной текст остаётся как был.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-rename"/></svg></span><span><b>Массовое переименование</b>: в режиме «по имени слоя» замена правит имена — можно за раз привести к порядку сотню слоёв.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-target"/></svg></span><span><b>Область сужается сама</b>: что-то выделено — ищем внутри выделенного, ничего не выделено — по всей странице. Отдельного тумблера нет и не нужно.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-layers"/></svg></span><span><b>Рекурсивный обход</b> — внутрь групп, фреймов, компонентов и инстансов.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-check"/></svg></span><span><b>Результат остаётся выделенным</b> на холсте, а в отчёте написано человеческим языком: «Выбрано 14 текстовых, содержащих "abc" в выбранном фрейме».</span></li>
+      </ul>
+      <div class="note reveal">
+        <div class="note__t"><svg class="ico"><use href="#i-spell"/></svg>Регистр сохраняется сам</div>
+        При замене плагин смотрит на первую букву найденного слова: была заглавная — подставляемое слово тоже
+        встанет с заглавной. «Кнопка» станет «Button», «кнопка» — «button», и всё это за один прогон,
+        без разделения на два поиска.
+      </div>
+    </div>
+
+    <div class="art anim plugin__art">
+      <svg viewBox="0 0 520 372" role="img" aria-label="Поиск слоёв по подстроке и массовая замена">
+        <!-- панель поиска -->
+        <g class="a-in" style="animation-delay:.1s">
+          <text class="s-text-dim" x="16" y="34" font-size="10.5">Тип объекта</text>
+          <g font-family="Inter, sans-serif" font-size="10.5">
+            <rect x="16" y="42" width="60" height="24" rx="12" fill="rgba(77,141,255,.18)" stroke="rgba(77,141,255,.6)"/>
+            <text x="46" y="58" text-anchor="middle" fill="#9dc0ff">Текст</text>
+            <rect x="84" y="42" width="62" height="24" rx="12" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.13)"/>
+            <text x="115" y="58" text-anchor="middle" fill="rgba(255,255,255,.45)">Фрейм</text>
+            <rect x="154" y="42" width="86" height="24" rx="12" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.13)"/>
+            <text x="197" y="58" text-anchor="middle" fill="rgba(255,255,255,.45)">Компонент</text>
+            <rect x="248" y="42" width="64" height="24" rx="12" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.13)"/>
+            <text x="280" y="58" text-anchor="middle" fill="rgba(255,255,255,.45)">Инстанс</text>
+          </g>
+
+          <rect x="16" y="80" width="296" height="36" rx="10" fill="rgba(255,255,255,.045)" stroke="rgba(77,141,255,.5)"/>
+          <g stroke="rgba(255,255,255,.42)" stroke-width="1.5" fill="none"><circle cx="38" cy="98" r="6"/><path d="M42.5 102.5L47 107"/></g>
+          <text x="58" y="103" font-size="13" fill="rgba(255,255,255,.86)" font-family="Inter, sans-serif">кнопка</text>
+          <rect class="a-caret" x="110" y="89" width="1.8" height="18" fill="#4d8dff"/>
+          <text class="s-text-dim" x="330" y="103" font-size="10.5">по содержимому</text>
+        </g>
+
+        <!-- список слоёв -->
+        <g class="a-in" style="animation-delay:.3s">
+          <text class="s-text-dim" x="16" y="146" font-size="10.5">Слои страницы</text>
+          <rect x="16" y="156" width="296" height="196" rx="12" fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.11)"/>
+        </g>
+        <g font-family="Inter, sans-serif" font-size="11">
+          <g><rect x="28" y="168" width="272" height="26" rx="7" fill="rgba(255,255,255,.03)"/>
+             <text x="44" y="185" fill="rgba(255,255,255,.42)">Header / Logo</text></g>
+
+          <g><rect class="a-hit" style="animation-delay:.2s" x="28" y="200" width="272" height="26" rx="7" fill="rgba(77,141,255,.16)" stroke="rgba(77,141,255,.5)"/>
+             <text x="44" y="217" fill="rgba(255,255,255,.86)">Кнопка «Оформить»</text>
+             <path class="a-hit" style="animation-delay:.2s" d="M276 212l3 3 5.5-6" stroke="#4d8dff" stroke-width="1.8" fill="none" stroke-linecap="round"/></g>
+
+          <g><rect x="28" y="232" width="272" height="26" rx="7" fill="rgba(255,255,255,.03)"/>
+             <text x="44" y="249" fill="rgba(255,255,255,.42)">Card / Title</text></g>
+
+          <g><rect class="a-hit" style="animation-delay:.5s" x="28" y="264" width="272" height="26" rx="7" fill="rgba(77,141,255,.16)" stroke="rgba(77,141,255,.5)"/>
+             <text x="44" y="281" fill="rgba(255,255,255,.86)">кнопка назад</text>
+             <path class="a-hit" style="animation-delay:.5s" d="M276 276l3 3 5.5-6" stroke="#4d8dff" stroke-width="1.8" fill="none" stroke-linecap="round"/></g>
+
+          <g><rect class="a-hit" style="animation-delay:.8s" x="28" y="296" width="272" height="26" rx="7" fill="rgba(77,141,255,.16)" stroke="rgba(77,141,255,.5)"/>
+             <text x="44" y="313" fill="rgba(255,255,255,.86)">Кнопка / Icon</text>
+             <path class="a-hit" style="animation-delay:.8s" d="M276 308l3 3 5.5-6" stroke="#4d8dff" stroke-width="1.8" fill="none" stroke-linecap="round"/></g>
+
+          <g><rect x="28" y="328" width="272" height="18" rx="7" fill="rgba(255,255,255,.02)"/>
+             <text x="44" y="341" fill="rgba(255,255,255,.3)" font-size="10">…ещё 11 совпадений</text></g>
+        </g>
+
+        <!-- превью замены -->
+        <g class="a-in" style="animation-delay:.6s">
+          <text class="s-text-dim" x="332" y="146" font-size="10.5">Замена</text>
+          <rect x="332" y="156" width="172" height="120" rx="12" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.12)"/>
+          <g font-family="Inter, sans-serif" font-size="12">
+            <text x="348" y="184" fill="rgba(255,255,255,.42)">Кнопка</text>
+            <path d="M410 180h16M420 175l6 5-6 5" stroke="#4d8dff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="434" y="184" fill="#9dc0ff" font-weight="600">Button</text>
+
+            <text x="348" y="212" fill="rgba(255,255,255,.42)">кнопка</text>
+            <path d="M410 208h16M420 203l6 5-6 5" stroke="#4d8dff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="434" y="212" fill="#9dc0ff" font-weight="600">button</text>
+          </g>
+          <rect x="348" y="230" width="140" height="30" rx="8" fill="rgba(77,141,255,.13)" stroke="rgba(77,141,255,.4)"/>
+          <text x="418" y="249" font-size="10.5" text-anchor="middle" fill="#9dc0ff" font-family="Inter, sans-serif">регистр сохранён</text>
+
+          <rect x="332" y="292" width="172" height="30" rx="15" fill="rgba(77,141,255,.2)" stroke="rgba(77,141,255,.6)"/>
+          <text x="418" y="311.5" font-size="12" font-weight="600" text-anchor="middle" fill="#c3d8ff" font-family="Inter, sans-serif">Найти и заменить</text>
+          <text class="s-text-dim" x="418" y="342" font-size="10.5" text-anchor="middle">Выбрано 14 текстовых слоёв</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ 8. ICONS ══════════════════ -->
+<section class="plugin" id="icons" style="--c:var(--mint)">
+  <div class="wrap plugin__in">
+    <div>
+      <span class="plugin__tag reveal"><svg class="ico"><use href="#i-download"/></svg>Icons Download</span>
+      <h2 class="reveal d1">Иконки в SVG — <em>и дифф всего набора</em></h2>
+      <p class="plugin__lead reveal d2">
+        Сам находит на странице иконки по правилам дизайн-системы, выгружает их в SVG одним архивом
+        с раскладкой по фреймам и умеет сравнить текущее состояние набора с сохранённым снимком:
+        что добавилось, что пропало и что изменилось.
+      </p>
+      <ul class="feats">
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-scan"/></svg></span><span><b>Поиск по конвенции именования</b>: иконкой считается содержимое компонентов, чьё имя начинается на Outline, Outlined или Solid.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-ruler"/></svg></span><span><b>Плюс поиск по точному размеру</b> — для составных иконок вроде флагов, которые не сводятся к одному вектору. Список размеров настраивается: 28 или 28×40, и он сохраняется между запусками.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-frame"/></svg></span><span><b>Экспортируется компонент целиком</b>, а не вложенный вектор — иначе viewBox обрезался бы по границам фигуры и выходило бы «0 0 15.43 17.96» вместо «0 0 24 24».</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-rename"/></svg></span><span><b>Имена файлов нормализуются</b>: снимаются префиксы Outline и Solid, служебный «Type=», ведущая точка, из «Group / Variant» остаётся последнее.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-zip"/></svg></span><span><b>ZIP с папками по фреймам</b>: одна иконка скачивается отдельным файлом, много — архивом с той же структурой, что и на макете.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-compare"/></svg></span><span><b>Снимок и сравнение</b>: added, removed, changed — с миниатюрами «было → стало». «Changed» ловит и изменение геометрии, и переименование, и перенос в другой фрейм.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-history"/></svg></span><span><b>Снимок привязан к странице</b> — в многостраничном файле у каждой страницы своя независимая история сравнения.</span></li>
+        <li class="reveal"><span class="fico"><svg class="ico"><use href="#i-target"/></svg></span><span><b>Клик по строке ведёт к иконке</b> на холсте, прогресс показывается в процентах, а неудачные выгрузки честно попадают в отчёт.</span></li>
+      </ul>
+      <div class="note reveal">
+        <div class="note__t"><svg class="ico"><use href="#i-shield"/></svg>Смена страницы не портит результат</div>
+        У каждой долгой операции есть номер поколения. Переключили страницу посреди сканирования —
+        операция обрывается, а результат отбрасывается. Иначе в один архив попали бы иконки двух разных страниц.
+      </div>
+      <div class="note reveal">
+        <div class="note__t"><svg class="ico"><use href="#i-compare"/></svg>Почему дифф вообще работает</div>
+        Плагин сознательно не «чинит» viewBox после экспорта: подрезка обратно под размер фрейма
+        обрезала контент у иконок с обводкой. Побочный и очень полезный эффект — байты SVG стабильны от прогона
+        к прогону, поэтому побайтовое сравнение со снимком даёт честный результат, а не шум.
+      </div>
+    </div>
+
+    <div class="art anim plugin__art">
+      <svg viewBox="0 0 520 372" role="img" aria-label="Сканирование иконок, выгрузка в архив и сравнение со снимком">
+        <defs>
+          <linearGradient id="scanl" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#35e0a1" stop-opacity="0"/><stop offset=".5" stop-color="#35e0a1"/><stop offset="1" stop-color="#35e0a1" stop-opacity="0"/>
+          </linearGradient>
+          <clipPath id="gclip"><rect x="16" y="52" width="276" height="236" rx="12"/></clipPath>
+        </defs>
+
+        <!-- сетка иконок -->
+        <g class="a-in" style="animation-delay:.1s">
+          <text class="s-text-dim" x="16" y="42" font-size="10.5">Найдено на странице: 12</text>
+          <rect x="16" y="52" width="276" height="236" rx="12" fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.11)"/>
+        </g>
+        <g stroke="#35e0a1" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".9">
+          <g class="a-pop" style="animation-delay:.3s"><rect x="32" y="68" width="56" height="56" rx="10" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.1)" stroke-width="1"/><path d="M48 96l6 6 12-14"/></g>
+          <g class="a-pop" style="animation-delay:.36s"><rect x="100" y="68" width="56" height="56" rx="10" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.1)" stroke-width="1"/><circle cx="128" cy="96" r="11"/><path d="M128 89v7l5 3"/></g>
+          <g class="a-pop" style="animation-delay:.42s"><rect x="168" y="68" width="56" height="56" rx="10" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.1)" stroke-width="1"/><path d="M186 102l10-14 10 14zM196 88v0"/></g>
+          <g class="a-pop" style="animation-delay:.48s"><rect x="236" y="68" width="40" height="56" rx="10" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.1)" stroke-width="1"/><path d="M248 88h16M248 96h16M248 104h10"/></g>
+
+          <g class="a-pop" style="animation-delay:.54s"><rect x="32" y="136" width="56" height="56" rx="10" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.1)" stroke-width="1"/><path d="M60 152l4.5 9 9.5 1.4-7 6.6 1.7 9.4-8.7-4.6-8.7 4.6 1.7-9.4-7-6.6 9.5-1.4z"/></g>
+          <g class="a-pop" style="animation-delay:.6s"><rect x="100" y="136" width="56" height="56" rx="10" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.1)" stroke-width="1"/><circle cx="124" cy="160" r="8"/><path d="M130 166l8 8"/></g>
+          <g class="a-pop" style="animation-delay:.66s"><rect x="168" y="136" width="56" height="56" rx="10" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.1)" stroke-width="1"/><path d="M182 172l8-10 6 6 10-12"/><path d="M182 176h28"/></g>
+          <g class="a-pop" style="animation-delay:.72s"><rect x="236" y="136" width="40" height="56" rx="10" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.1)" stroke-width="1"/><rect x="248" y="152" width="16" height="20" rx="3"/><path d="M252 158h8"/></g>
+
+          <g class="a-pop" style="animation-delay:.78s"><rect x="32" y="204" width="56" height="56" rx="10" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.1)" stroke-width="1"/><path d="M60 218v20M50 228h20"/></g>
+          <g class="a-pop" style="animation-delay:.84s"><rect x="100" y="204" width="56" height="56" rx="10" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.1)" stroke-width="1"/><path d="M116 222h24M116 232h24M116 242h14"/></g>
+          <g class="a-pop" style="animation-delay:.9s"><rect x="168" y="204" width="56" height="56" rx="10" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.1)" stroke-width="1"/><path d="M196 216l10 6v12l-10 6-10-6v-12z"/></g>
+          <g class="a-pop" style="animation-delay:.96s"><rect x="236" y="204" width="40" height="56" rx="10" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.1)" stroke-width="1"/><circle cx="256" cy="232" r="10"/><circle cx="256" cy="232" r="3.6"/></g>
+        </g>
+
+        <!-- сканирующая линия -->
+        <g clip-path="url(#gclip)">
+          <rect class="a-scan" style="--dist:230px" x="16" y="56" width="276" height="3" fill="url(#scanl)"/>
+        </g>
+
+        <!-- бейджи диффа -->
+        <g font-family="Inter, sans-serif" font-size="11" font-weight="700">
+          <g class="a-pop" style="animation-delay:1.5s"><circle cx="84" cy="72" r="10" fill="#0b0b0f" stroke="#35e0a1" stroke-width="1.6"/><text x="84" y="76" text-anchor="middle" fill="#35e0a1">+</text></g>
+          <g class="a-pop" style="animation-delay:1.62s"><circle cx="220" cy="140" r="10" fill="#0b0b0f" stroke="#ffb020" stroke-width="1.6"/><text x="220" y="144.5" text-anchor="middle" fill="#ffb020">~</text></g>
+          <g class="a-pop" style="animation-delay:1.74s"><circle cx="152" cy="208" r="10" fill="#0b0b0f" stroke="#ff5386" stroke-width="1.6"/><text x="152" y="212.5" text-anchor="middle" fill="#ff5386">−</text></g>
+        </g>
+
+        <!-- итог: архив -->
+        <g class="a-in" style="animation-delay:1.1s">
+          <rect x="312" y="52" width="192" height="132" rx="12" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.12)"/>
+          <g stroke="#35e0a1" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M330 78a2 2 0 0 1 2-2h5l2.6 3.2h11.4a2 2 0 0 1 2 2v12.6a2 2 0 0 1-2 2h-19a2 2 0 0 1-2-2z"/>
+            <path d="M344 84v1.6M344 88v1.6M344 92v1.6"/>
+          </g>
+          <text x="364" y="88" font-size="13" font-weight="700" fill="#fff" font-family="Manrope, Inter, sans-serif">icons.zip</text>
+          <g class="s-mono" font-size="10.5" fill="rgba(255,255,255,.5)">
+            <text x="332" y="118">Header/</text>
+            <text x="346" y="134">chevron-left.svg</text>
+            <text x="346" y="150">search.svg</text>
+            <text x="332" y="168">Tabbar/  <tspan fill="rgba(255,255,255,.32)">+ 9 файлов</tspan></text>
+          </g>
+        </g>
+
+        <!-- итог: дифф -->
+        <g class="a-in" style="animation-delay:1.3s">
+          <rect x="312" y="196" width="192" height="156" rx="12" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.12)"/>
+          <text class="s-text-dim" x="328" y="220" font-size="10.5">Сравнение со снимком</text>
+
+          <g font-family="Inter, sans-serif" font-size="11">
+            <rect x="328" y="232" width="160" height="30" rx="8" fill="rgba(53,224,161,.1)" stroke="rgba(53,224,161,.4)"/>
+            <text x="344" y="251" fill="#7ef0c6">Добавлено</text>
+            <text x="470" y="251" text-anchor="end" fill="#35e0a1" font-weight="700">2</text>
+
+            <rect x="328" y="268" width="160" height="30" rx="8" fill="rgba(255,176,32,.1)" stroke="rgba(255,176,32,.4)"/>
+            <text x="344" y="287" fill="#ffcf7a">Изменено</text>
+            <text x="470" y="287" text-anchor="end" fill="#ffb020" font-weight="700">1</text>
+
+            <rect x="328" y="304" width="160" height="30" rx="8" fill="rgba(255,83,134,.1)" stroke="rgba(255,83,134,.4)"/>
+            <text x="344" y="323" fill="#ff8fb0">Удалено</text>
+            <text x="470" y="323" text-anchor="end" fill="#ff5386" font-weight="700">1</text>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ КАК УСТРОЕНО ══════════════════ -->
+<section class="section" id="how" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sechead reveal">
+      <div class="eyebrow">Общие принципы</div>
+      <h2>Что объединяет все восемь</h2>
+      <p>Плагины делались одной командой и по одним правилам. Отсюда — общие свойства, которые заметны в работе.</p>
+    </div>
+
+    <div class="how">
+      <div class="how__i reveal" style="--c:var(--pink)">
+        <div class="fico"><svg class="ico"><use href="#i-layers"/></svg></div>
+        <h3>Результат — живые слои</h3>
+        <p>График, компонент, слайд PowerPoint — всё создаётся настоящими объектами, которые можно доредактировать руками. Растр появляется только там, где формат-приёмник иначе не умеет.</p>
+      </div>
+      <div class="how__i reveal d1" style="--c:var(--violet)">
+        <div class="fico"><svg class="ico"><use href="#i-flask"/></svg></div>
+        <h3>Автотесты с эталонами</h3>
+        <p>Экспорт презентаций сверяется с сотнями эталонных файлов в трёх форматах, геометрия графиков — снапшот-тестом по хешу SVG на 32 наборах данных, правила типографа — юнит-тестами.</p>
+      </div>
+      <div class="how__i reveal d2" style="--c:var(--cyan)">
+        <div class="fico"><svg class="ico"><use href="#i-bolt"/></svg></div>
+        <h3>Рассчитаны на большие файлы</h3>
+        <p>Кэши вместо повторных обходов, пакетные запросы вместо тысяч точечных, обработка чанками с отдачей управления, предохранители на количество кандидатов. Панель не подвисает на тяжёлой странице.</p>
+      </div>
+      <div class="how__i reveal" style="--c:var(--lime)">
+        <div class="fico"><svg class="ico"><use href="#i-undo"/></svg></div>
+        <h3>Обратимость</h3>
+        <p>Массовые правки коммитятся одним шагом Undo, оригинал удаляется только после успешного создания замены, а если структура объекта не совпала — плагин не трогает его вовсе.</p>
+      </div>
+      <div class="how__i reveal d1" style="--c:var(--amber)">
+        <div class="fico"><svg class="ico"><use href="#i-lang"/></svg></div>
+        <h3>Русский по умолчанию</h3>
+        <p>Интерфейсы и подсказки написаны на русском, типограф знает правила русского набора, а сортировка учитывает кириллицу. У проверки контраста есть ещё английский и китайский.</p>
+      </div>
+      <div class="how__i reveal d2" style="--c:var(--mint)">
+        <div class="fico"><svg class="ico"><use href="#i-window"/></svg></div>
+        <h3>Одинаковая механика</h3>
+        <p>Везде одна архитектура: сцена и панель обмениваются сообщениями, настройки живут в хранилище плагина или в самой ноде, окно запоминает размер. Освоив один — понимаешь остальные.</p>
+      </div>
+    </div>
+
+    <div class="nums reveal">
+      <div><b data-count="8">0</b><span>плагинов в наборе</span></div>
+      <div><b data-count="17">0</b><span>правил типографа</span></div>
+      <div><b data-count="32">0</b><span>снапшот-теста геометрии графиков</span></div>
+      <div><b data-count="3">0</b><span>формата сверки экспорта презентаций</span></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════════ ФУТЕР ══════════════════ -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__in">
+      <div class="foot__l">
+        <a class="brand" href="#top">
+          <svg class="brand__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <rect x="1" y="1" width="30" height="30" rx="9" stroke="url(#bg1)" stroke-width="1.6"/>
+            <path d="M16 7.5l4.6 4.6-4.6 4.6-4.6-4.6z" fill="#ff5386"/>
+            <path d="M16 15.3l4.6 4.6L16 24.5l-4.6-4.6z" fill="#7a5cff" opacity=".9"/>
+          </svg>
+          <span class="brand__name">Admiral</span>
+        </a>
+        <p>Набор плагинов для Pixso: презентации, графики, компоненты, тексты, контраст, стили, поиск слоёв и иконки.</p>
+      </div>
+      <div class="foot__cols">
+        <div class="foot__col">
+          <h4>Плагины</h4>
+          <a href="#presman">PresMan</a>
+          <a href="#charts">Charts</a>
+          <a href="#compman">CompMan</a>
+          <a href="#gramm">GrammMan</a>
+        </div>
+        <div class="foot__col">
+          <h4>&nbsp;</h4>
+          <a href="#contrast">ContrastPlugin</a>
+          <a href="#styles">Styles &amp; Variables</a>
+          <a href="#chooseman">ChooseMan</a>
+          <a href="#icons">Icons Download</a>
+        </div>
+        <div class="foot__col">
+          <h4>Ещё</h4>
+          <a href="#how">Как устроено</a>
+          <a href="https://github.com/admiral-team" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot__bot">
+      <span>© 2026 Admiral</span>
+      <span>Сделано для дизайнеров, которые не любят делать одно и то же дважды</span>
+    </div>
+  </div>
+</footer>
+
+<button class="totop" aria-label="Наверх"><svg class="ico"><use href="#i-up"/></svg></button>
+
+<script src="js/main.js"></script>
 </body>
 </html>

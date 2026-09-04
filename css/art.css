@@ -1,0 +1,103 @@
+/* ============================================================
+   Анимации иллюстраций
+   Все классы начинаются с a-  → движок ставит их на паузу,
+   пока блок не появится в зоне видимости (.anim → .anim.in)
+   ============================================================ */
+
+/* --- базовые --- */
+
+@keyframes artFadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes artFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes artPop    { 0% { opacity: 0; transform: scale(.55); } 62% { opacity: 1; transform: scale(1.1); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes artDraw   { to { stroke-dashoffset: 0; } }
+@keyframes artGrowY  { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes artGrowX  { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes artSlideR { from { opacity: 0; transform: translateX(-46px) scale(.9); } to { opacity: 1; transform: none; } }
+@keyframes artSlideL { from { opacity: 0; transform: translateX(46px) scale(.9); } to { opacity: 1; transform: none; } }
+
+.a-in    { animation: artFadeUp .75s cubic-bezier(.22,.61,.36,1) both; }
+.a-fade  { animation: artFadeIn .8s ease both; }
+.a-pop   { animation: artPop .6s cubic-bezier(.22,.61,.36,1) both; }
+.a-right { animation: artSlideR .85s cubic-bezier(.22,.61,.36,1) both; }
+.a-left  { animation: artSlideL .85s cubic-bezier(.22,.61,.36,1) both; }
+.a-growy { transform-box: fill-box; transform-origin: 50% 100%; animation: artGrowY .95s cubic-bezier(.22,.61,.36,1) both; }
+.a-growx { transform-box: fill-box; transform-origin: 0% 50%; animation: artGrowX 1.1s cubic-bezier(.22,.61,.36,1) both; }
+.a-draw  { stroke-dasharray: 600; stroke-dashoffset: 600; animation: artDraw 1.8s cubic-bezier(.22,.61,.36,1) both; }
+.a-draw-s { stroke-dasharray: 200; stroke-dashoffset: 200; animation: artDraw 1.2s cubic-bezier(.22,.61,.36,1) both; }
+
+/* --- зацикленные --- */
+
+@keyframes artSwapOut { 0%, 40% { opacity: 1; } 48%, 100% { opacity: 0; } }
+@keyframes artSwapIn  { 0%, 40% { opacity: 0; } 48%, 100% { opacity: 1; } }
+.a-was { animation: artSwapOut 5.5s ease-in-out infinite; }
+.a-now { animation: artSwapIn  5.5s ease-in-out infinite; }
+
+@keyframes artStep1 { 0%,18% { opacity: 1; } 25%,100% { opacity: 0; } }
+@keyframes artStep2 { 0%,18% { opacity: 0; } 25%,45% { opacity: 1; } 52%,100% { opacity: 0; } }
+@keyframes artStep3 { 0%,45% { opacity: 0; } 52%,100% { opacity: 1; } }
+.a-s1 { animation: artStep1 6s ease-in-out infinite; }
+.a-s2 { animation: artStep2 6s ease-in-out infinite; }
+.a-s3 { animation: artStep3 6s ease-in-out infinite; }
+
+@keyframes artFlow { to { stroke-dashoffset: -160; } }
+.a-flow { stroke-dasharray: 5 7; animation: artFlow 5s linear infinite; }
+
+@keyframes artScan {
+  0%   { transform: translateY(0);   opacity: 0; }
+  6%   { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { transform: translateY(var(--dist, 180px)); opacity: 0; }
+}
+.a-scan { animation: artScan 3.4s cubic-bezier(.5,0,.5,1) infinite; }
+
+@keyframes artBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+.a-bob { animation: artBob 4.5s ease-in-out infinite; }
+
+@keyframes artBob2 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+.a-bob2 { animation: artBob2 5.4s ease-in-out infinite; }
+
+@keyframes artBlink { 0%,48% { opacity: 1; } 49%,100% { opacity: 0; } }
+.a-caret { animation: artBlink 1.1s steps(1) infinite; }
+
+@keyframes artGlow { 0%,100% { opacity: .28; } 50% { opacity: .85; } }
+.a-glow { animation: artGlow 3.2s ease-in-out infinite; }
+
+@keyframes artSpin { to { transform: rotate(360deg); } }
+.a-spin { transform-box: fill-box; transform-origin: center; animation: artSpin 16s linear infinite; }
+
+/* курсор, который «нажимает» */
+@keyframes artClick {
+  0%, 12%   { transform: translate(0,0) scale(1); }
+  22%       { transform: translate(0,0) scale(.82); }
+  30%, 100% { transform: translate(0,0) scale(1); }
+}
+.a-click { transform-box: fill-box; transform-origin: 10% 10%; animation: artClick 4s ease-in-out infinite; }
+
+/* волнистое подчёркивание ошибки: появляется и уходит */
+@keyframes artSquiggle { 0%,8% { opacity: 0; } 16%,52% { opacity: 1; } 62%,100% { opacity: 0; } }
+.a-squig { animation: artSquiggle 5.5s ease-in-out infinite; }
+
+/* галочка «исправлено» */
+@keyframes artFixed { 0%,58% { opacity: 0; transform: scale(.6); } 70%,100% { opacity: 1; transform: scale(1); } }
+.a-fixed { transform-box: fill-box; transform-origin: center; animation: artFixed 5.5s ease-in-out infinite; }
+
+/* строка результата подсвечивается по очереди */
+@keyframes artHit {
+  0%, 10%  { opacity: 0; transform: translateX(-6px); }
+  20%, 78% { opacity: 1; transform: none; }
+  90%,100% { opacity: 0; transform: translateX(-6px); }
+}
+.a-hit { animation: artHit 5s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .a-in, .a-fade, .a-pop, .a-right, .a-left, .a-growy, .a-growx,
+  .a-draw, .a-draw-s, .a-was, .a-now, .a-s1, .a-s2, .a-s3, .a-flow,
+  .a-scan, .a-bob, .a-bob2, .a-caret, .a-glow, .a-spin, .a-click,
+  .a-squig, .a-fixed, .a-hit {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+  .a-was, .a-s1, .a-s2 { opacity: 0 !important; }
+}
